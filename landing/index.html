@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GoalCast AI — World Cup 2026 Predictions</title>
-<meta name="description" content="AI-powered World Cup 2026 predictions. All 104 matches, every team. Predict, compete, win prizes at your favorite watch party venue in Atlanta and beyond.">
+<meta name="description" content="AI-powered World Cup 2026 predictions. All 104 matches, every team. Predict, compete, win prizes at your favorite watch party venue across host cities in the US, Mexico, and Canada.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
 <style>
@@ -694,6 +694,48 @@
     .stats-bar { gap: 2rem; }
   }
 
+  /* ── CITY AUTOCOMPLETE ── */
+  .autocomplete-wrap {
+    position: relative;
+  }
+
+  .autocomplete-wrap input {
+    width: 100%;
+  }
+
+  .autocomplete-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: #0e1218;
+    border: 1px solid var(--green);
+    border-top: none;
+    max-height: 180px;
+    overflow-y: auto;
+    z-index: 200;
+  }
+
+  .autocomplete-dropdown.open { display: block; }
+
+  .autocomplete-option {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--white);
+    transition: background 0.15s;
+  }
+
+  .autocomplete-option:hover,
+  .autocomplete-option.active {
+    background: rgba(0,230,118,0.12);
+    color: var(--green);
+  }
+
+  .autocomplete-dropdown::-webkit-scrollbar { width: 4px; }
+  .autocomplete-dropdown::-webkit-scrollbar-track { background: transparent; }
+  .autocomplete-dropdown::-webkit-scrollbar-thumb { background: var(--border); }
+
   /* Success message */
   .success-msg {
     display: none;
@@ -725,7 +767,7 @@
 <section class="hero">
   <div class="hero-badge">
     <span class="dot"></span>
-    FIFA World Cup 2026 · All 104 Matches · Atlanta Host City
+    FIFA World Cup 2026 · All 104 Matches · 16 Host Cities
   </div>
 
   <h1>
@@ -735,7 +777,7 @@
   </h1>
 
   <p class="hero-sub">AI-powered predictions for every World Cup match — all 104 games, every team, every round.</p>
-  <p class="hero-sub-es">Predicciones para todos los partidos del Mundial. Compite con fans en Atlanta y en todo USA.</p>
+  <p class="hero-sub-es">Predicciones para todos los partidos del Mundial. Compite con fans en tu ciudad — USA, México y Canadá.</p>
 
   <div class="hero-actions">
     <a href="#join" class="btn-primary">Get Early Access</a>
@@ -752,8 +794,8 @@
       <span class="stat-label">Teams · Equipos</span>
     </div>
     <div class="stat">
-      <span class="stat-number">8</span>
-      <span class="stat-label">Atlanta Games</span>
+      <span class="stat-number">16</span>
+      <span class="stat-label">Host Cities · Sedes</span>
     </div>
     <div class="stat">
       <span class="stat-number">AI</span>
@@ -779,13 +821,13 @@
       <div class="how-number">02</div>
       <div class="how-title">Earn Points</div>
       <div class="how-title-es">Gana puntos</div>
-      <p class="how-desc">Score points for every correct prediction. Bonus points for exact scores. Compete on the Atlanta leaderboard.</p>
+      <p class="how-desc">Score points for every correct prediction. Bonus points for exact scores. Compete on your city's leaderboard.</p>
     </div>
     <div class="how-card">
       <div class="how-number">03</div>
       <div class="how-title">Win at Watch Parties</div>
       <div class="how-title-es">Gana en el watch party</div>
-      <p class="how-desc">Top predictors win prizes sponsored by local Atlanta restaurants and businesses. Show up, celebrate, collect.</p>
+      <p class="how-desc">Top predictors win prizes sponsored by local restaurants and businesses in your city. Show up, celebrate, collect.</p>
     </div>
     <div class="how-card">
       <div class="how-number">04</div>
@@ -798,9 +840,9 @@
 
 <!-- MATCHES IN ATLANTA -->
 <section class="section" id="matches" style="padding-top:0">
-  <div class="section-label">Atlanta Schedule · Partidos en Atlanta</div>
-  <h2 class="section-title">8 Matches<br>in Your City.</h2>
-  <p class="section-sub">GoalCast covers all 104 World Cup matches — these 8 are in your backyard · Estos 8 son en Atlanta, pero predices todos</p>
+  <div class="section-label">Host City Spotlight · Sedes destacadas</div>
+  <h2 class="section-title">Matches<br>in Your City.</h2>
+  <p class="section-sub">GoalCast covers all 104 World Cup matches across every host city — here's an example schedule from Atlanta · Cobertura completa en todas las sedes</p>
 
   <div class="matches-grid">
     <div class="match-card">
@@ -899,14 +941,14 @@
     <div>
       <div class="section-label">For Businesses · Para Negocios</div>
       <h2 class="section-title">Be the Official<br>Watch Party Venue.</h2>
-      <p class="section-sub">Conviértete en sede oficial del watch party en Atlanta</p>
+      <p class="section-sub">Conviértete en sede oficial del watch party en tu ciudad</p>
 
       <ul class="benefits-list">
         <div class="benefit">
           <div class="benefit-icon">📍</div>
           <div class="benefit-text">
             <strong>Featured in the App</strong>
-            <span>Your venue appears as an official watch party location for fans searching in Atlanta during the tournament.</span>
+            <span>Your venue appears as an official watch party location for fans searching in your city during the tournament.</span>
           </div>
         </div>
         <div class="benefit">
@@ -970,16 +1012,78 @@
         <input type="email" placeholder="tu@email.com" required>
       </div>
       <div class="form-group">
+        <label>Your City · Tu ciudad</label>
+        <div class="autocomplete-wrap">
+          <input type="text" class="city-input" placeholder="Escribe tu ciudad..." autocomplete="off" required>
+          <input type="hidden" name="city">
+          <div class="autocomplete-dropdown"></div>
+        </div>
+      </div>
+      <div class="form-group">
         <label>Favorite Team · Equipo favorito</label>
-        <select>
+        <select name="team">
           <option value="">Select / Selecciona...</option>
-          <option>🇪🇸 Spain / España</option>
-          <option>🇲🇦 Morocco / Marruecos</option>
-          <option>🇲🇽 Mexico / México</option>
-          <option>🇧🇷 Brazil / Brasil</option>
-          <option>🇦🇷 Argentina</option>
-          <option>🇺🇸 USA</option>
-          <option>Other / Otro</option>
+          <optgroup label="🏠 Hosts · Anfitriones">
+            <option>🇺🇸 USA</option>
+            <option>🇨🇦 Canada</option>
+            <option>🇲🇽 Mexico</option>
+          </optgroup>
+          <optgroup label="🌍 Africa · CAF">
+            <option>🇨🇻 Cape Verde</option>
+            <option>🇨🇩 Congo DR</option>
+            <option>🇨🇮 Ivory Coast</option>
+            <option>🇪🇬 Egypt</option>
+            <option>🇲🇦 Morocco</option>
+            <option>🇳🇬 Nigeria</option>
+            <option>🇸🇳 Senegal</option>
+            <option>🇿🇦 South Africa</option>
+            <option>🇹🇳 Tunisia</option>
+          </optgroup>
+          <optgroup label="🌏 Asia · AFC">
+            <option>🇦🇺 Australia</option>
+            <option>🇮🇷 Iran</option>
+            <option>🇮🇶 Iraq</option>
+            <option>🇯🇵 Japan</option>
+            <option>🇯🇴 Jordan</option>
+            <option>🇰🇷 South Korea</option>
+            <option>🇸🇦 Saudi Arabia</option>
+            <option>🇺🇿 Uzbekistan</option>
+          </optgroup>
+          <optgroup label="🌎 Americas · CONMEBOL">
+            <option>🇦🇷 Argentina</option>
+            <option>🇧🇷 Brazil</option>
+            <option>🇨🇴 Colombia</option>
+            <option>🇪🇨 Ecuador</option>
+            <option>🇺🇾 Uruguay</option>
+            <option>🇻🇪 Venezuela</option>
+          </optgroup>
+          <optgroup label="🌎 Americas · CONCACAF">
+            <option>🇭🇹 Haiti</option>
+            <option>🇯🇲 Jamaica</option>
+            <option>🇵🇦 Panama</option>
+          </optgroup>
+          <optgroup label="🌿 Oceania · OFC">
+            <option>🇳🇿 New Zealand</option>
+          </optgroup>
+          <optgroup label="🌍 Europe · UEFA">
+            <option>🇦🇹 Austria</option>
+            <option>🇧🇪 Belgium</option>
+            <option>🇭🇷 Croatia</option>
+            <option>🇨🇿 Czechia</option>
+            <option>🇩🇰 Denmark</option>
+            <option>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</option>
+            <option>🇫🇷 France</option>
+            <option>🇩🇪 Germany</option>
+            <option>🇭🇺 Hungary</option>
+            <option>🇮🇹 Italy</option>
+            <option>🇳🇱 Netherlands</option>
+            <option>🇵🇹 Portugal</option>
+            <option>🇷🇸 Serbia</option>
+            <option>🇪🇸 Spain</option>
+            <option>🇨🇭 Switzerland</option>
+            <option>🇹🇷 Turkey</option>
+            <option>🇺🇦 Ukraine</option>
+          </optgroup>
         </select>
       </div>
       <button type="submit" class="btn-submit">Get Early Access — Free</button>
@@ -1010,6 +1114,14 @@
         <input type="tel" placeholder="+1 (404) 000-0000">
       </div>
       <div class="form-group">
+        <label>City · Ciudad</label>
+        <div class="autocomplete-wrap">
+          <input type="text" class="city-input" placeholder="Escribe tu ciudad..." autocomplete="off" required>
+          <input type="hidden" name="city">
+          <div class="autocomplete-dropdown"></div>
+        </div>
+      </div>
+      <div class="form-group">
         <label>Type of Business · Tipo de negocio</label>
         <select>
           <option>Bar / Sports Bar</option>
@@ -1028,21 +1140,125 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Goal<span>Cast</span> AI</div>
-  <p class="footer-text">goalcastai.com · World Cup 2026 · Atlanta, GA · Powered by AI</p>
+  <p class="footer-text">goalcastai.com · World Cup 2026 · USA · México · Canadá · Powered by AI</p>
   <p class="footer-text" style="margin-top:0.5rem;font-size:0.7rem;">© 2026 GoalCast AI · hello@goalcastai.com</p>
 </footer>
 
 <script>
+  const cityCache = {};
+
+  function formatCity(addr) {
+    const city = addr.city || addr.town || addr.village || addr.municipality || addr.county || '';
+    const state = addr.state || '';
+    const country = addr.country || '';
+    return [city, state, country].filter(Boolean).join(', ');
+  }
+
+  async function fetchCities(query) {
+    if (cityCache[query]) return cityCache[query];
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&addressdetails=1&limit=8&featuretype=city`;
+    const res = await fetch(url, {
+      headers: { 'Accept-Language': 'es,en', 'User-Agent': 'GoalCastAI/1.0 (goalcastai.com)' }
+    });
+    const data = await res.json();
+    const results = data
+      .map(r => formatCity(r.address))
+      .filter(Boolean)
+      .filter((v, i, a) => a.indexOf(v) === i); // dedupe
+    cityCache[query] = results;
+    return results;
+  }
+
+  function initCityAutocomplete(wrap) {
+    const textInput = wrap.querySelector('.city-input');
+    const hiddenInput = wrap.querySelector('input[name="city"]');
+    const dropdown = wrap.querySelector('.autocomplete-dropdown');
+    let activeIdx = -1;
+    let debounceTimer = null;
+
+    function renderOptions(cities) {
+      if (!cities.length) { dropdown.classList.remove('open'); return; }
+      activeIdx = -1;
+      dropdown.innerHTML = cities.map((c, i) =>
+        `<div class="autocomplete-option" data-idx="${i}">${c}</div>`
+      ).join('');
+      dropdown.classList.add('open');
+      dropdown.querySelectorAll('.autocomplete-option').forEach(opt => {
+        opt.addEventListener('mousedown', e => {
+          e.preventDefault();
+          selectCity(opt.textContent);
+        });
+      });
+    }
+
+    function selectCity(city) {
+      textInput.value = city;
+      hiddenInput.value = city;
+      dropdown.classList.remove('open');
+    }
+
+    async function onInput() {
+      const q = textInput.value.trim();
+      hiddenInput.value = '';
+      if (q.length < 2) { dropdown.classList.remove('open'); return; }
+      dropdown.innerHTML = '<div class="autocomplete-option" style="color:var(--muted)">Buscando...</div>';
+      dropdown.classList.add('open');
+      try {
+        const cities = await fetchCities(q);
+        renderOptions(cities);
+      } catch {
+        dropdown.classList.remove('open');
+      }
+    }
+
+    textInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(onInput, 350);
+    });
+
+    textInput.addEventListener('keydown', e => {
+      const opts = dropdown.querySelectorAll('.autocomplete-option');
+      if (!opts.length || !dropdown.classList.contains('open')) return;
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIdx = Math.min(activeIdx + 1, opts.length - 1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIdx = Math.max(activeIdx - 1, 0);
+      } else if (e.key === 'Enter' && activeIdx >= 0) {
+        e.preventDefault();
+        selectCity(opts[activeIdx].textContent);
+        return;
+      } else if (e.key === 'Escape') {
+        dropdown.classList.remove('open');
+        return;
+      }
+      opts.forEach((o, i) => o.classList.toggle('active', i === activeIdx));
+    });
+
+    document.addEventListener('click', e => {
+      if (!wrap.contains(e.target)) dropdown.classList.remove('open');
+    });
+
+    textInput.addEventListener('blur', () => {
+      if (!hiddenInput.value) hiddenInput.value = textInput.value;
+    });
+  }
+
+  document.querySelectorAll('.autocomplete-wrap').forEach(initCityAutocomplete);
+
   function handleFanSubmit(e) {
     e.preventDefault();
     document.getElementById('fan-success').style.display = 'block';
     e.target.reset();
+    e.target.querySelectorAll('input[name="city"]').forEach(i => i.value = '');
   }
 
   function handleBusinessSubmit(e) {
     e.preventDefault();
     document.getElementById('business-success').style.display = 'block';
     e.target.reset();
+    e.target.querySelectorAll('input[name="city"]').forEach(i => i.value = '');
   }
 
   // Smooth scroll for nav links
