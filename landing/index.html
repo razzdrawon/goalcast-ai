@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,6 +30,34 @@
     font-family: 'DM Sans', sans-serif;
     overflow-x: hidden;
   }
+
+  /* ── LANGUAGE SWITCHING ── */
+  .en .t-es { display: none; }
+  .es .t-en { display: none; }
+
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .lang-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0.25rem 0.4rem;
+    transition: color 0.2s;
+    text-transform: uppercase;
+  }
+
+  .lang-btn:hover { color: var(--white); }
+  .lang-btn.active { color: var(--green); }
+  .lang-sep { color: var(--border); font-size: 0.7rem; user-select: none; }
 
   /* ── NOISE TEXTURE OVERLAY ── */
   body::after {
@@ -756,93 +784,117 @@
 <nav>
   <div class="logo">Goal<span>Cast</span> AI</div>
   <ul class="nav-links">
-    <li><a href="#how">How it works</a></li>
-    <li><a href="#matches">Matches</a></li>
-    <li><a href="#restaurants">For Businesses</a></li>
-    <li><a href="#join" class="nav-cta">Join Free</a></li>
+    <li><a href="#how"><span class="t-en">How it works</span><span class="t-es">Cómo funciona</span></a></li>
+    <li><a href="#matches"><span class="t-en">Matches</span><span class="t-es">Partidos</span></a></li>
+    <li><a href="#restaurants"><span class="t-en">For Businesses</span><span class="t-es">Para Negocios</span></a></li>
+    <li><a href="#join" class="nav-cta"><span class="t-en">Join Free</span><span class="t-es">Únete Gratis</span></a></li>
   </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-badge">
     <span class="dot"></span>
-    FIFA World Cup 2026 · All 104 Matches · 16 Host Cities
+    <span class="t-en">FIFA World Cup 2026 · All 104 Matches · 16 Host Cities</span>
+    <span class="t-es">FIFA World Cup 2026 · Los 104 Partidos · 16 Ciudades Sede</span>
   </div>
 
   <h1>
-    Predict.<br>
-    <span class="line2">Win.</span>
-    Repeat.
+    <span class="t-en">Predict.<br><span class="line2">Win.</span> Repeat.</span>
+    <span class="t-es">Predice.<br><span class="line2">Gana.</span> Repite.</span>
   </h1>
 
-  <p class="hero-sub">AI-powered predictions for every World Cup match — all 104 games, every team, every round.</p>
-  <p class="hero-sub-es">Predicciones para todos los partidos del Mundial. Compite con fans en tu ciudad — USA, México y Canadá.</p>
+  <p class="hero-sub t-en">AI-powered predictions for every World Cup match — all 104 games, every team, every round.</p>
+  <p class="hero-sub t-es">Predicciones con IA para todos los partidos del Mundial. Compite con fans en tu ciudad — USA, México y Canadá.</p>
 
   <div class="hero-actions">
-    <a href="#join" class="btn-primary">Get Early Access</a>
-    <a href="#restaurants" class="btn-secondary">For Businesses →</a>
+    <a href="#join" class="btn-primary">
+      <span class="t-en">Get Early Access</span>
+      <span class="t-es">Acceso Anticipado</span>
+    </a>
+    <a href="#restaurants" class="btn-secondary">
+      <span class="t-en">For Businesses →</span>
+      <span class="t-es">Para Negocios →</span>
+    </a>
   </div>
 
   <div class="stats-bar">
     <div class="stat">
       <span class="stat-number">104</span>
-      <span class="stat-label">Total Matches</span>
+      <span class="stat-label"><span class="t-en">Total Matches</span><span class="t-es">Partidos</span></span>
     </div>
     <div class="stat">
       <span class="stat-number">48</span>
-      <span class="stat-label">Teams · Equipos</span>
+      <span class="stat-label"><span class="t-en">Teams</span><span class="t-es">Equipos</span></span>
     </div>
     <div class="stat">
       <span class="stat-number">16</span>
-      <span class="stat-label">Host Cities · Sedes</span>
+      <span class="stat-label"><span class="t-en">Host Cities</span><span class="t-es">Ciudades Sede</span></span>
     </div>
     <div class="stat">
       <span class="stat-number">AI</span>
-      <span class="stat-label">Powered Predictions</span>
+      <span class="stat-label"><span class="t-en">Powered Predictions</span><span class="t-es">Predicciones IA</span></span>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
 <section class="section" id="how">
-  <div class="section-label">How it works · Cómo funciona</div>
+  <div class="section-label">
+    <span class="t-en">How it works</span>
+    <span class="t-es">Cómo funciona</span>
+  </div>
   <h2 class="section-title">Simple.<br>Smart. Fun.</h2>
-  <p class="section-sub">Powered by real match data and AI analysis · Impulsado por datos reales e inteligencia artificial</p>
+  <p class="section-sub t-en">Powered by real match data and AI analysis</p>
+  <p class="section-sub t-es">Impulsado por datos reales e inteligencia artificial</p>
 
   <div class="how-grid">
     <div class="how-card">
       <div class="how-number">01</div>
-      <div class="how-title">Predict Every Match</div>
-      <div class="how-title-es">Predice cada partido</div>
-      <p class="how-desc">All 104 World Cup matches. Our AI analyzes team stats, form, and historical data to help you make smarter predictions — from group stage to the final.</p>
+      <div class="how-title t-en">Predict Every Match</div>
+      <div class="how-title t-es">Predice cada partido</div>
+      <p class="how-desc t-en">All 104 World Cup matches. Our AI analyzes team stats, form, and historical data to help you make smarter predictions — from group stage to the final.</p>
+      <p class="how-desc t-es">Los 104 partidos del Mundial. Nuestra IA analiza estadísticas, forma y datos históricos para ayudarte a predecir mejor — de la fase de grupos a la final.</p>
     </div>
     <div class="how-card">
       <div class="how-number">02</div>
-      <div class="how-title">Earn Points</div>
-      <div class="how-title-es">Gana puntos</div>
-      <p class="how-desc">Score points for every correct prediction. Bonus points for exact scores. Compete on your city's leaderboard.</p>
+      <div class="how-title t-en">Earn Points</div>
+      <div class="how-title t-es">Gana puntos</div>
+      <p class="how-desc t-en">Score points for every correct prediction. Bonus points for exact scores. Compete on your city's leaderboard.</p>
+      <p class="how-desc t-es">Acumula puntos con cada predicción correcta. Puntos extra por marcador exacto. Compite en el leaderboard de tu ciudad.</p>
     </div>
     <div class="how-card">
       <div class="how-number">03</div>
-      <div class="how-title">Win at Watch Parties</div>
-      <div class="how-title-es">Gana en el watch party</div>
-      <p class="how-desc">Top predictors win prizes sponsored by local restaurants and businesses in your city. Show up, celebrate, collect.</p>
+      <div class="how-title t-en">Win at Watch Parties</div>
+      <div class="how-title t-es">Gana en el watch party</div>
+      <p class="how-desc t-en">Top predictors win prizes sponsored by local restaurants and businesses in your city. Show up, celebrate, collect.</p>
+      <p class="how-desc t-es">Los mejores predictores ganan premios patrocinados por restaurantes y negocios locales. Preséntate, celebra y reclama tu premio.</p>
     </div>
     <div class="how-card">
       <div class="how-number">04</div>
-      <div class="how-title">Live Trivia</div>
-      <div class="how-title-es">Trivia en vivo</div>
-      <p class="how-desc">Answer real-time trivia during matches at your watch party venue. Stay in the game for the full 90 minutes.</p>
+      <div class="how-title t-en">Live Trivia</div>
+      <div class="how-title t-es">Trivia en vivo</div>
+      <p class="how-desc t-en">Answer real-time trivia during matches at your watch party venue. Stay in the game for the full 90 minutes.</p>
+      <p class="how-desc t-es">Responde trivia en vivo durante los partidos en tu sede de watch party. Mantente en el juego los 90 minutos completos.</p>
     </div>
   </div>
 </section>
 
 <!-- MATCHES IN ATLANTA -->
 <section class="section" id="matches" style="padding-top:0">
-  <div class="section-label">Host City Spotlight · Sedes destacadas</div>
-  <h2 class="section-title">Matches<br>in Your City.</h2>
-  <p class="section-sub">GoalCast covers all 104 World Cup matches across every host city — here's an example schedule from Atlanta · Cobertura completa en todas las sedes</p>
+  <div class="section-label">
+    <span class="t-en">Host City Spotlight</span>
+    <span class="t-es">Sedes Destacadas</span>
+  </div>
+  <h2 class="section-title t-en">Matches<br>in Your City.</h2>
+  <h2 class="section-title t-es">Partidos<br>en tu Ciudad.</h2>
+  <p class="section-sub t-en">GoalCast covers all 104 matches across every host city — example schedule from Atlanta</p>
+  <p class="section-sub t-es">GoalCast cubre los 104 partidos en todas las ciudades sede — ejemplo de partidos en Atlanta</p>
 
   <div class="matches-grid">
     <div class="match-card">
@@ -939,58 +991,83 @@
 <div class="restaurant-section" id="restaurants">
   <div class="restaurant-inner">
     <div>
-      <div class="section-label">For Businesses · Para Negocios</div>
-      <h2 class="section-title">Be the Official<br>Watch Party Venue.</h2>
-      <p class="section-sub">Conviértete en sede oficial del watch party en tu ciudad</p>
+      <div class="section-label">
+        <span class="t-en">For Businesses</span>
+        <span class="t-es">Para Negocios</span>
+      </div>
+      <h2 class="section-title t-en">Be the Official<br>Watch Party Venue.</h2>
+      <h2 class="section-title t-es">Sé la Sede Oficial<br>del Watch Party.</h2>
+      <p class="section-sub t-en">Turn every match day into a loyal crowd that keeps coming back</p>
+      <p class="section-sub t-es">Convierte cada partido en una experiencia que fideliza a tus clientes</p>
 
       <ul class="benefits-list">
         <div class="benefit">
           <div class="benefit-icon">📍</div>
           <div class="benefit-text">
-            <strong>Featured in the App</strong>
-            <span>Your venue appears as an official watch party location for fans searching in your city during the tournament.</span>
+            <strong class="t-en">Featured in the App</strong>
+            <strong class="t-es">En la App como Sede Oficial</strong>
+            <span class="t-en">Your venue appears as an official watch party location for fans searching in your city during the tournament.</span>
+            <span class="t-es">Tu venue aparece como sede oficial para los fans que buscan dónde ver el partido en tu ciudad.</span>
           </div>
         </div>
         <div class="benefit">
-          <div class="benefit-icon">👥</div>
+          <div class="benefit-icon">⏱️</div>
           <div class="benefit-text">
-            <strong>Drive Foot Traffic</strong>
-            <span>Fans come to your venue to play live trivia and compete on the leaderboard — they stay longer, they spend more.</span>
+            <strong class="t-en">90 Minutes of Engagement</strong>
+            <strong class="t-es">90 Minutos de Engagement</strong>
+            <span class="t-en">Live trivia during every match keeps fans at your bar for the full game — they don't leave at halftime.</span>
+            <span class="t-es">La trivia en vivo mantiene a tus clientes en el bar los 90 minutos — no se van al medio tiempo.</span>
           </div>
         </div>
         <div class="benefit">
           <div class="benefit-icon">🏆</div>
           <div class="benefit-text">
-            <strong>Sponsor the Prize</strong>
-            <span>Your restaurant sponsors the tournament winner's prize. One dinner for two. Your brand on every notification we send.</span>
+            <strong class="t-en">You Define the Prize</strong>
+            <strong class="t-es">Tú Defines el Premio</strong>
+            <span class="t-en">You decide what to give and how often — per match, weekly, or end of tournament. We announce the winner with your name and send them back to claim it.</span>
+            <span class="t-es">Tú decides qué dar y cuándo — por partido, semanal o al final del torneo. Nosotros anunciamos al ganador con tu nombre y lo mandamos a reclamarlo.</span>
           </div>
         </div>
         <div class="benefit">
           <div class="benefit-icon">📊</div>
           <div class="benefit-text">
-            <strong>Get Real Data</strong>
-            <span>See how many GoalCast users visited your venue. Real engagement metrics, not just impressions.</span>
+            <strong class="t-en">Know Who's Coming</strong>
+            <strong class="t-es">Sabe Quién Viene</strong>
+            <span class="t-en">Pre-match report: how many GoalCast fans plan to show up for each game. Staff, stock and prep with real data.</span>
+            <span class="t-es">Reporte pre-partido: cuántos fans de GoalCast planean ir ese día. Prepárate con datos reales, no suposiciones.</span>
           </div>
         </div>
       </ul>
     </div>
 
     <div class="partnership-card">
-      <div class="partnership-title">Venue Partnership</div>
-      <p class="partnership-sub">Asociación de sede oficial · World Cup 2026</p>
+      <div class="partnership-title t-en">Venue Partnership</div>
+      <div class="partnership-title t-es">Alianza de Sede</div>
+      <p class="partnership-sub t-en">Founding venue spots · World Cup 2026</p>
+      <p class="partnership-sub t-es">Sedes fundadoras · Mundial 2026</p>
       <div class="partnership-price">FREE*</div>
-      <p class="partnership-price-sub">*Sponsor a prize to get featured. No upfront cost.</p>
+      <p class="partnership-price-sub t-en">*Define a prize for your customers. No cost to GoalCast.</p>
+      <p class="partnership-price-sub t-es">*Define un premio para tus clientes. Sin costo para GoalCast.</p>
       <ul class="partnership-features">
-        <li>Listed as Official Watch Party Venue</li>
-        <li>Featured in match day notifications</li>
-        <li>Live trivia activation at your location</li>
-        <li>Monthly visitor report</li>
-        <li>Co-branded social media content</li>
-        <li>Priority placement during Semifinal (Jul 15)</li>
+        <li><span class="t-en">Listed as Official Watch Party Venue</span><span class="t-es">Listado como Sede Oficial</span></li>
+        <li><span class="t-en">Featured in match day notifications</span><span class="t-es">En las notificaciones pre-partido</span></li>
+        <li><span class="t-en">Live trivia activation at your location</span><span class="t-es">Trivia en vivo en tu venue</span></li>
+        <li><span class="t-en">Pre-match fan count report</span><span class="t-es">Reporte de asistencia por partido</span></li>
+        <li><span class="t-en">Winner announcements with your brand</span><span class="t-es">Anuncio de ganadores con tu nombre</span></li>
+        <li><span class="t-en">Founding venue permanent top placement</span><span class="t-es">Placement prioritario permanente</span></li>
       </ul>
-      <a href="/demo" target="_blank" class="btn-secondary" style="display:block;text-align:center;width:100%;margin-bottom:0.8rem;">👀 Ver el Demo · See the Fan Experience</a>
-      <a href="#business-form" class="btn-primary" style="display:block;text-align:center;width:100%;">Become a Venue Partner</a>
-      <p class="form-note">Limited spots available · Cupos limitados</p>
+      <a href="/demo" target="_blank" class="btn-secondary" style="display:block;text-align:center;width:100%;margin-bottom:0.8rem;">
+        <span class="t-en">👀 See the Fan Experience</span>
+        <span class="t-es">👀 Ver la Experiencia del Fan</span>
+      </a>
+      <a href="#business-form" class="btn-primary" style="display:block;text-align:center;width:100%;">
+        <span class="t-en">Become a Venue Partner</span>
+        <span class="t-es">Únete como Sede Oficial</span>
+      </a>
+      <p class="form-note">
+        <span class="t-en">Limited founding spots available</span>
+        <span class="t-es">Cupos de sedes fundadoras limitados</span>
+      </p>
     </div>
   </div>
 </div>
@@ -1000,11 +1077,12 @@
 
   <!-- Fan form -->
   <div class="form-card">
-    <h3>For Fans · Para Fans</h3>
-    <p class="form-sub">Get early access when we launch · Sé el primero en predecir</p>
+    <h3><span class="t-en">For Fans</span><span class="t-es">Para Fans</span></h3>
+    <p class="form-sub t-en">Get early access when we launch</p>
+    <p class="form-sub t-es">Sé el primero en predecir cuando lancemos</p>
     <form onsubmit="handleFanSubmit(event)">
       <div class="form-group">
-        <label>Your Name · Tu Nombre</label>
+        <label><span class="t-en">Your Name</span><span class="t-es">Tu Nombre</span></label>
         <input type="text" placeholder="Ricardo Padilla" required>
       </div>
       <div class="form-group">
@@ -1012,15 +1090,15 @@
         <input type="email" placeholder="tu@email.com" required>
       </div>
       <div class="form-group">
-        <label>Your City · Tu ciudad</label>
+        <label><span class="t-en">Your City</span><span class="t-es">Tu Ciudad</span></label>
         <div class="autocomplete-wrap">
-          <input type="text" class="city-input" placeholder="Escribe tu ciudad..." autocomplete="off" required>
+          <input type="text" class="city-input" placeholder="Atlanta, CDMX, Salt Lake City..." autocomplete="off" required>
           <input type="hidden" name="city">
           <div class="autocomplete-dropdown"></div>
         </div>
       </div>
       <div class="form-group">
-        <label>Favorite Team · Equipo favorito</label>
+        <label><span class="t-en">Favorite Team</span><span class="t-es">Equipo Favorito</span></label>
         <select name="team">
           <option value="">Select / Selecciona...</option>
           <optgroup label="🏠 Hosts · Anfitriones">
@@ -1086,53 +1164,72 @@
           </optgroup>
         </select>
       </div>
-      <button type="submit" class="btn-submit">Get Early Access — Free</button>
-      <div class="success-msg" id="fan-success">🎉 You're on the list! We'll reach out before June 15.</div>
-      <p class="form-note">No spam. Launch notification only. · Sin spam, solo aviso de lanzamiento.</p>
+      <button type="submit" class="btn-submit">
+        <span class="t-en">Get Early Access — Free</span>
+        <span class="t-es">Acceso Anticipado — Gratis</span>
+      </button>
+      <div class="success-msg" id="fan-success">
+        <span class="t-en">🎉 You're on the list! We'll reach out before June 15.</span>
+        <span class="t-es">🎉 ¡Ya estás en la lista! Te avisamos antes del 15 de junio.</span>
+      </div>
+      <p class="form-note">
+        <span class="t-en">No spam. Launch notification only.</span>
+        <span class="t-es">Sin spam. Solo aviso de lanzamiento.</span>
+      </p>
     </form>
   </div>
 
   <!-- Business form -->
   <div class="form-card" id="business-form">
-    <h3>For Businesses</h3>
-    <p class="form-sub">Become an Official Watch Party Venue · Sede oficial del Mundial</p>
+    <h3><span class="t-en">For Businesses</span><span class="t-es">Para Negocios</span></h3>
+    <p class="form-sub t-en">Become an Official Watch Party Venue</p>
+    <p class="form-sub t-es">Conviértete en Sede Oficial del Watch Party</p>
     <form onsubmit="handleBusinessSubmit(event)">
       <div class="form-group">
-        <label>Business Name · Nombre del negocio</label>
-        <input type="text" placeholder="Bar El Golazo ATL" required>
+        <label><span class="t-en">Business Name</span><span class="t-es">Nombre del Negocio</span></label>
+        <input type="text" placeholder="Bar El Golazo" required>
       </div>
       <div class="form-group">
-        <label>Your Name · Tu nombre</label>
-        <input type="text" placeholder="Name / Nombre" required>
+        <label><span class="t-en">Your Name</span><span class="t-es">Tu Nombre</span></label>
+        <input type="text" placeholder="Ricardo Padilla" required>
       </div>
       <div class="form-group">
         <label>Email</label>
         <input type="email" placeholder="manager@yourbusiness.com" required>
       </div>
       <div class="form-group">
-        <label>Phone · Teléfono</label>
+        <label><span class="t-en">Phone</span><span class="t-es">Teléfono</span></label>
         <input type="tel" placeholder="+1 (404) 000-0000">
       </div>
       <div class="form-group">
-        <label>City · Ciudad</label>
+        <label><span class="t-en">City</span><span class="t-es">Ciudad</span></label>
         <div class="autocomplete-wrap">
-          <input type="text" class="city-input" placeholder="Escribe tu ciudad..." autocomplete="off" required>
+          <input type="text" class="city-input" placeholder="Atlanta, CDMX, Salt Lake City..." autocomplete="off" required>
           <input type="hidden" name="city">
           <div class="autocomplete-dropdown"></div>
         </div>
       </div>
       <div class="form-group">
-        <label>Type of Business · Tipo de negocio</label>
+        <label><span class="t-en">Type of Business</span><span class="t-es">Tipo de Negocio</span></label>
         <select>
-          <option>Bar / Sports Bar</option>
-          <option>Restaurant / Restaurante</option>
-          <option>Hotel / Lounge</option>
-          <option>Other / Otro</option>
+          <option><span class="t-en">Bar / Sports Bar</span><span class="t-es">Bar / Sports Bar</span></option>
+          <option><span class="t-en">Restaurant</span><span class="t-es">Restaurante</span></option>
+          <option><span class="t-en">Hotel / Lounge</span><span class="t-es">Hotel / Lounge</span></option>
+          <option><span class="t-en">Other</span><span class="t-es">Otro</span></option>
         </select>
       </div>
-      <button type="submit" class="btn-submit btn-submit-gold">Apply as Venue Partner</button>
-      <div class="success-msg" id="business-success">✅ Got it! We'll contact you within 24 hours.</div>
-      <p class="form-note">We'll reach out within 24 hours · Te contactamos en menos de 24 horas</p>
+      <button type="submit" class="btn-submit btn-submit-gold">
+        <span class="t-en">Apply as Venue Partner</span>
+        <span class="t-es">Aplicar como Sede Oficial</span>
+      </button>
+      <div class="success-msg" id="business-success">
+        <span class="t-en">✅ Got it! We'll contact you within 24 hours.</span>
+        <span class="t-es">✅ ¡Listo! Te contactamos en menos de 24 horas.</span>
+      </div>
+      <p class="form-note">
+        <span class="t-en">We'll reach out within 24 hours</span>
+        <span class="t-es">Te contactamos en menos de 24 horas</span>
+      </p>
     </form>
   </div>
 </div>
@@ -1140,7 +1237,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Goal<span>Cast</span> AI</div>
-  <p class="footer-text">goalcastai.com · World Cup 2026 · USA · México · Canadá · Powered by AI</p>
+  <p class="footer-text">goalcastai.com · World Cup 2026 · USA · México · Canadá</p>
   <p class="footer-text" style="margin-top:0.5rem;font-size:0.7rem;">© 2026 GoalCast AI · hello@goalcastai.com</p>
 </footer>
 
@@ -1268,6 +1365,25 @@
       document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  // ── LANGUAGE SWITCHING ──
+  function setLang(lang) {
+    const html = document.documentElement;
+    html.classList.remove('en', 'es');
+    html.classList.add(lang);
+    html.setAttribute('lang', lang === 'es' ? 'es' : 'en');
+    localStorage.setItem('gc-lang', lang);
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  }
+
+  // Auto-detect on first visit: saved preference → browser language → default EN
+  (function () {
+    const saved = localStorage.getItem('gc-lang');
+    const browser = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    const lang = saved || (browser.startsWith('es') ? 'es' : 'en');
+    setLang(lang);
+  })();
 </script>
 </body>
 </html>
