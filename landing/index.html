@@ -648,6 +648,63 @@
 
   .form-group input::placeholder { color: var(--muted); }
 
+  /* ── PHONE FIELD WITH COUNTRY CODE ── */
+  .phone-wrap {
+    display: flex;
+    gap: 0;
+  }
+
+  .phone-code-select {
+    width: auto;
+    flex-shrink: 0;
+    background: var(--black);
+    border: 1px solid var(--border);
+    border-right: none;
+    color: var(--white);
+    padding: 0.8rem 0.6rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7a8d'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    padding-right: 1.4rem;
+    transition: border-color 0.2s;
+  }
+
+  .phone-code-select:focus {
+    border-color: var(--green);
+    outline: none;
+  }
+
+  .phone-number-input {
+    flex: 1;
+    background: var(--black);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 0.8rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    min-width: 0;
+  }
+
+  .phone-number-input:focus {
+    border-color: var(--green);
+  }
+
+  .phone-number-input::placeholder { color: var(--muted); }
+
+  .phone-wrap:focus-within .phone-code-select,
+  .phone-wrap:focus-within .phone-number-input {
+    border-color: var(--green);
+  }
+
   .btn-submit {
     width: 100%;
     background: var(--green);
@@ -1199,7 +1256,21 @@
       </div>
       <div class="form-group">
         <label><span class="t-en">Phone</span><span class="t-es">Teléfono</span></label>
-        <input type="tel" placeholder="+1 (404) 000-0000">
+        <div class="phone-wrap">
+          <select class="phone-code-select" id="phone-code" name="phone_code" aria-label="Country code">
+            <option value="+1">🇺🇸 +1</option>
+            <option value="+52">🇲🇽 +52</option>
+            <option value="+1-CA">🇨🇦 +1</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+34">🇪🇸 +34</option>
+            <option value="+54">🇦🇷 +54</option>
+            <option value="+55">🇧🇷 +55</option>
+            <option value="+57">🇨🇴 +57</option>
+            <option value="+51">🇵🇪 +51</option>
+            <option value="+56">🇨🇱 +56</option>
+          </select>
+          <input class="phone-number-input" type="tel" id="phone-number" name="phone_number" placeholder="(404) 000-0000" autocomplete="tel-national">
+        </div>
       </div>
       <div class="form-group">
         <label><span class="t-en">City</span><span class="t-es">Ciudad</span></label>
@@ -1375,7 +1446,44 @@
     localStorage.setItem('gc-lang', lang);
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+
+    // Default phone country code if user hasn't manually changed it
+    const phoneCode = document.getElementById('phone-code');
+    if (phoneCode && !phoneCode.dataset.userPicked) {
+      phoneCode.value = lang === 'es' ? '+52' : '+1';
+      updatePhonePlaceholder(phoneCode.value);
+    }
   }
+
+  // Update placeholder to match selected country code
+  function updatePhonePlaceholder(code) {
+    const input = document.getElementById('phone-number');
+    if (!input) return;
+    const placeholders = {
+      '+1':    '(404) 000-0000',
+      '+1-CA': '(416) 000-0000',
+      '+52':   '55 1234 5678',
+      '+44':   '07700 000000',
+      '+34':   '612 000 000',
+      '+54':   '11 1234-5678',
+      '+55':   '11 91234-5678',
+      '+57':   '300 000 0000',
+      '+51':   '900 000 000',
+      '+56':   '9 1234 5678',
+    };
+    input.placeholder = placeholders[code] || '000 000 0000';
+  }
+
+  // Mark as user-picked when they manually change the code
+  (function () {
+    const phoneCode = document.getElementById('phone-code');
+    if (phoneCode) {
+      phoneCode.addEventListener('change', () => {
+        phoneCode.dataset.userPicked = 'true';
+        updatePhonePlaceholder(phoneCode.value);
+      });
+    }
+  })();
 
   // Auto-detect on first visit: saved preference → browser language → default EN
   (function () {
