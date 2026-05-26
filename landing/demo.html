@@ -919,6 +919,115 @@
     border-radius: 50%;
   }
 
+  /* ── AI ANALYSIS SCREEN ── */
+  .ai-prob-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .prob-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .prob-team-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    min-width: 90px;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--white);
+  }
+
+  .prob-bar-wrap {
+    flex: 1;
+    height: 8px;
+    background: var(--card);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .prob-bar {
+    height: 100%;
+    border-radius: 4px;
+  }
+
+  .spain-bar { background: var(--green); }
+  .draw-bar  { background: var(--muted); }
+  .ksa-bar   { background: #4a5568; }
+
+  .prob-pct {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--white);
+    min-width: 2.2rem;
+    text-align: right;
+    line-height: 1;
+  }
+
+  .prob-pct.dim { color: var(--muted); }
+
+  .ai-factors-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .factor-item {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+  }
+
+  .factor-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  .factor-text { display: flex; flex-direction: column; gap: 0.1rem; }
+
+  .factor-text strong {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .factor-text span {
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .ai-accuracy-card {
+    background: rgba(0,230,118,0.06);
+    border: 1px solid rgba(0,230,118,0.2);
+    border-radius: 12px;
+    padding: 0.9rem;
+    text-align: center;
+  }
+
+  .accuracy-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--green);
+    line-height: 1;
+  }
+
+  .accuracy-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+    letter-spacing: 0.03em;
+  }
+
   /* Animations */
   @keyframes pulse {
     0%, 100% { opacity: 1; }
@@ -1036,7 +1145,7 @@
                 <div class="match-team-name">Saudi Arabia</div>
               </div>
             </div>
-            <button class="predict-cta" onclick="goToScreen(1)">⚡ Make Your Prediction</button>
+            <button class="predict-cta" onclick="goToScreen(1)">🤖 See AI Analysis</button>
           </div>
 
           <div class="ai-insight">
@@ -1063,34 +1172,96 @@
         </div>
 
         <div class="bottom-nav">
-          <div class="nav-item active">
-            <div class="nav-icon">🏠</div>
-            <div class="nav-dot"></div>
-            <div class="nav-label">Home</div>
-          </div>
-          <div class="nav-item" onclick="goToScreen(1)">
-            <div class="nav-icon">⚽</div>
-            <div class="nav-label">Predict</div>
-          </div>
-          <div class="nav-item" onclick="goToScreen(2)">
-            <div class="nav-icon">🏆</div>
-            <div class="nav-label">Ranking</div>
-          </div>
-          <div class="nav-item" onclick="goToScreen(3)">
-            <div class="nav-icon">⚡</div>
-            <div class="nav-label">Live</div>
-          </div>
+          <div class="nav-item active"><div class="nav-icon">🏠</div><div class="nav-dot"></div><div class="nav-label">Home</div></div>
+          <div class="nav-item" onclick="goToScreen(1)"><div class="nav-icon">🤖</div><div class="nav-label">AI</div></div>
+          <div class="nav-item" onclick="goToScreen(2)"><div class="nav-icon">⚽</div><div class="nav-label">Predict</div></div>
+          <div class="nav-item" onclick="goToScreen(3)"><div class="nav-icon">🏆</div><div class="nav-label">Ranking</div></div>
+          <div class="nav-item" onclick="goToScreen(4)"><div class="nav-icon">⚡</div><div class="nav-label">Live</div></div>
         </div>
       </div>
 
-      <!-- SCREEN 2: PREDICT -->
+      <!-- SCREEN 2: AI ANALYSIS -->
+      <div class="screen" id="screen-1">
+        <div class="status-bar">
+          <span class="status-time">9:42</span>
+          <div class="status-icons"><span>●●●</span><span>🔋</span></div>
+        </div>
+        <div class="predict-header">
+          <button class="back-btn" onclick="goToScreen(0)">← Back</button>
+          <div class="predict-title">AI Analysis</div>
+          <div class="predict-sub">Spain vs Saudi Arabia · Jun 21 · Group Stage</div>
+        </div>
+        <div class="screen-content" style="padding-top:0.5rem">
+
+          <div class="ai-prob-card">
+            <div class="ai-insight-label">🤖 Win Probability</div>
+            <div class="prob-row">
+              <div class="prob-team-label">🇪🇸 Spain</div>
+              <div class="prob-bar-wrap"><div class="prob-bar spain-bar" style="width:78%"></div></div>
+              <div class="prob-pct">78%</div>
+            </div>
+            <div class="prob-row">
+              <div class="prob-team-label">🤝 Draw</div>
+              <div class="prob-bar-wrap"><div class="prob-bar draw-bar" style="width:12%"></div></div>
+              <div class="prob-pct dim">12%</div>
+            </div>
+            <div class="prob-row">
+              <div class="prob-team-label">🇸🇦 Saudi Arabia</div>
+              <div class="prob-bar-wrap"><div class="prob-bar ksa-bar" style="width:10%"></div></div>
+              <div class="prob-pct dim">10%</div>
+            </div>
+          </div>
+
+          <div class="ai-factors-card">
+            <div class="ai-insight-label">📊 Key Factors</div>
+            <div class="factor-item">
+              <div class="factor-icon">🔥</div>
+              <div class="factor-text">
+                <strong>Win Streak</strong>
+                <span>Spain unbeaten in last 6 consecutive group stage matches</span>
+              </div>
+            </div>
+            <div class="factor-item">
+              <div class="factor-icon">⚽</div>
+              <div class="factor-text">
+                <strong>Group Stage Form</strong>
+                <span>Spain scored 8 goals in their last 3 group matches — avg 2.7 per game</span>
+              </div>
+            </div>
+            <div class="factor-item">
+              <div class="factor-icon">🛡️</div>
+              <div class="factor-text">
+                <strong>Defensive Record</strong>
+                <span>Saudi Arabia conceded 2+ goals in 4 of their last 5 away fixtures</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-accuracy-card">
+            <div class="accuracy-num">73%</div>
+            <div class="accuracy-label">AI accuracy across last 3 tournaments</div>
+          </div>
+
+          <button class="submit-predict" onclick="goToScreen(2)">⚽ Make Your Prediction →</button>
+        </div>
+
+        <div class="bottom-nav">
+          <div class="nav-item" onclick="goToScreen(0)"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
+          <div class="nav-item active"><div class="nav-icon">🤖</div><div class="nav-dot"></div><div class="nav-label">AI</div></div>
+          <div class="nav-item" onclick="goToScreen(2)"><div class="nav-icon">⚽</div><div class="nav-label">Predict</div></div>
+          <div class="nav-item" onclick="goToScreen(3)"><div class="nav-icon">🏆</div><div class="nav-label">Ranking</div></div>
+          <div class="nav-item" onclick="goToScreen(4)"><div class="nav-icon">⚡</div><div class="nav-label">Live</div></div>
+        </div>
+      </div>
+
+      <!-- SCREEN 3: PREDICT -->
       <div class="screen" id="screen-1">
         <div class="status-bar">
           <span class="status-time">9:43</span>
           <div class="status-icons"><span>●●●</span><span>🔋</span></div>
         </div>
         <div class="predict-header">
-          <button class="back-btn" onclick="goToScreen(0)">← Back</button>
+          <button class="back-btn" onclick="goToScreen(1)">← Back</button>
           <div class="predict-title">Your Prediction</div>
           <div class="predict-sub">Predicción · Jun 21 · Spain vs Saudi Arabia</div>
         </div>
@@ -1138,18 +1309,19 @@
             </div>
           </div>
 
-          <button class="submit-predict" onclick="goToScreen(2)">Submit Prediction → +5 pts</button>
+          <button class="submit-predict" onclick="goToScreen(3)">Submit Prediction → +5 pts</button>
         </div>
 
         <div class="bottom-nav">
           <div class="nav-item" onclick="goToScreen(0)"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
+          <div class="nav-item" onclick="goToScreen(1)"><div class="nav-icon">🤖</div><div class="nav-label">AI</div></div>
           <div class="nav-item active"><div class="nav-icon">⚽</div><div class="nav-dot"></div><div class="nav-label">Predict</div></div>
-          <div class="nav-item" onclick="goToScreen(2)"><div class="nav-icon">🏆</div><div class="nav-label">Ranking</div></div>
-          <div class="nav-item" onclick="goToScreen(3)"><div class="nav-icon">⚡</div><div class="nav-label">Live</div></div>
+          <div class="nav-item" onclick="goToScreen(3)"><div class="nav-icon">🏆</div><div class="nav-label">Ranking</div></div>
+          <div class="nav-item" onclick="goToScreen(4)"><div class="nav-icon">⚡</div><div class="nav-label">Live</div></div>
         </div>
       </div>
 
-      <!-- SCREEN 3: LEADERBOARD -->
+      <!-- SCREEN 4: LEADERBOARD -->
       <div class="screen" id="screen-2">
         <div class="status-bar">
           <span class="status-time">9:45</span>
@@ -1247,13 +1419,14 @@
         <div style="height:60px"></div>
         <div class="bottom-nav">
           <div class="nav-item" onclick="goToScreen(0)"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
-          <div class="nav-item" onclick="goToScreen(1)"><div class="nav-icon">⚽</div><div class="nav-label">Predict</div></div>
+          <div class="nav-item" onclick="goToScreen(1)"><div class="nav-icon">🤖</div><div class="nav-label">AI</div></div>
+          <div class="nav-item" onclick="goToScreen(2)"><div class="nav-icon">⚽</div><div class="nav-label">Predict</div></div>
           <div class="nav-item active"><div class="nav-icon">🏆</div><div class="nav-dot"></div><div class="nav-label">Ranking</div></div>
-          <div class="nav-item" onclick="goToScreen(3)"><div class="nav-icon">⚡</div><div class="nav-label">Live</div></div>
+          <div class="nav-item" onclick="goToScreen(4)"><div class="nav-icon">⚡</div><div class="nav-label">Live</div></div>
         </div>
       </div>
 
-      <!-- SCREEN 4: LIVE TRIVIA -->
+      <!-- SCREEN 5: LIVE TRIVIA -->
       <div class="screen" id="screen-3">
         <div class="status-bar">
           <span class="status-time">3:47 PM</span>
@@ -1318,13 +1491,14 @@
 
         <div class="bottom-nav">
           <div class="nav-item" onclick="goToScreen(0)"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
-          <div class="nav-item" onclick="goToScreen(1)"><div class="nav-icon">⚽</div><div class="nav-label">Predict</div></div>
-          <div class="nav-item" onclick="goToScreen(2)"><div class="nav-icon">🏆</div><div class="nav-label">Ranking</div></div>
+          <div class="nav-item" onclick="goToScreen(1)"><div class="nav-icon">🤖</div><div class="nav-label">AI</div></div>
+          <div class="nav-item" onclick="goToScreen(2)"><div class="nav-icon">⚽</div><div class="nav-label">Predict</div></div>
+          <div class="nav-item" onclick="goToScreen(3)"><div class="nav-icon">🏆</div><div class="nav-label">Ranking</div></div>
           <div class="nav-item active"><div class="nav-icon">⚡</div><div class="nav-dot"></div><div class="nav-label">Live</div></div>
         </div>
       </div>
 
-      <!-- SCREEN 5: PRIZE -->
+      <!-- SCREEN 6: PRIZE -->
       <div class="screen prize-screen" id="screen-4">
         <div class="status-bar">
           <span class="status-time">10:00</span>
@@ -1380,9 +1554,9 @@
 </div>
 
 <script>
-  const screenNames = ['Home Screen', 'Predict Match', 'ATL Leaderboard', 'Live Trivia', 'Prize Screen'];
+  const screenNames = ['Home Screen', 'AI Analysis', 'Predict Match', 'ATL Leaderboard', 'Live Trivia', 'Prize Screen'];
   let current = 0;
-  const total = 5;
+  const total = 6;
 
   // Build dots
   const dotsEl = document.getElementById('dots');
@@ -1413,7 +1587,7 @@
     document.getElementById('screen-name').textContent = screenNames[current];
 
     // Timer animation for trivia
-    if (current === 3) startTimer();
+    if (current === 4) startTimer();
   }
 
   function nextScreen() { goToScreen(current + 1); }
