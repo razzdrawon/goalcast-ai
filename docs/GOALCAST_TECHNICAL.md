@@ -188,4 +188,32 @@ Estimated AWS cost during tournament: ~$50-80/month
 
 ---
 
+## Venue Prize Configuration
+
+Each venue customizes their own prize and eligibility rules. No platform-imposed rules.
+
+### Configurable fields (Venue Dashboard)
+- **Prize description** — free text (e.g. "Dinner for two", "Free round of drinks")
+- **Minimum check-ins required** — number set by venue (suggested: 3-5)
+- **Prize deadline** — date (default: July 19, World Cup Final)
+
+### Check-in mechanic
+- Venue generates a unique 4-digit code per match via the dashboard
+- Code is valid from kickoff until kickoff + 30 minutes
+- Fan enters code in app → receives +3 bonus points + check-in counted
+- Fan must reach venue's minimum check-in threshold to be eligible for prize
+
+### Data tracked per venue
+- Total check-ins per match
+- Unique fans checked in
+- Fans who have reached eligibility threshold
+- Pre-match report: fans who have GoalCast and selected this venue
+
+### Why customizable
+- Different venues have different margins and prize budgets
+- Gives venue ownership over their program
+- Makes the pitch easier — "you set the rules"
+
+---
+
 *Last updated: May 2026*

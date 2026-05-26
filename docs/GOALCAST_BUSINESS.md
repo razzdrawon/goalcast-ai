@@ -28,20 +28,45 @@ AI-powered World Cup 2026 predictions platform. Fans predict match results, comp
 
 ## Business Model
 
-### Fans (B2C)
-- **Free tier:** predictions, leaderboard, basic AI analysis
-- **Paid tier:** $9.99 for the full tournament — deep AI analysis, detailed stats, match previews
+### Fans (B2C) — Freemium
+
+| Feature | Free | Paid ($9.99 / tournament) |
+|---------|------|--------------------------|
+| Predictions (all 104 matches) | ✅ | ✅ |
+| City + venue leaderboard | ✅ | ✅ |
+| Basic AI insight per match (1 line) | ✅ | ✅ |
+| Deep AI analysis — win probability with reasoning | ❌ | ✅ |
+| Key factors breakdown (form, defense, history) | ❌ | ✅ |
+| Pre-match narrative report | ❌ | ✅ |
+| Historical accuracy tracking | ❌ | ✅ |
+| Live trivia | ✅ | ✅ |
+
+The paid tier is a one-time $9.99 for the full tournament — not a subscription. Fans convert when they want to stop guessing and start understanding why Spain at 78% is not the same as Saudi Arabia at 10%.
+
 - **No sports betting / no affiliate links** — kept out for simplicity and legal reasons at this stage
 
-### Restaurants (B2B)
-- **Free to join** — listed as Official Watch Party Venue in the app
-- **Define their own prizes** — venue decides what and when to give (per match, weekly, by phase, end of tournament). App announces the winner, venue delivers the prize offline
-- **Future:** featured placement fee ($99-299) once user base is validated
+### Venues (B2B) — What we ask, what they get
+
+**What GoalCast asks from the venue:**
+- Name, address and logo to list them in the app — that's it
+- Define and deliver prizes for the dynamics they choose to activate (match, weekly, phase, tournament). They pick what prize and when. We don't set the rules.
+- No money paid to GoalCast. No subscription. No contract.
+
+**What the venue gets in return:**
+- Listed as Official Watch Party Venue — fans see them when choosing where to watch
+- Fan traffic reports before each match: "47 GoalCast users plan to watch here on June 21"
+- Live trivia keeps fans at the venue for the full 90 minutes — they drink, they stay, they spend
+- App announces winners publicly with their venue's name: "🏆 Jornada 3 winner at Bar El Golazo: @carlos_m"
+- Push notification to the winner drives them back to the venue to claim the prize
+- Co-branded social content and mention in notifications
+
+**Future venue revenue for GoalCast:**
+- Featured placement fee ($99-299) once user base is validated
+- Premium analytics — detailed fan behavior and visit reports
 
 ### Potential future revenue
 - Brand sponsorships (Heineken, Modelo, Corona) — pay to appear as official beer sponsor
 - Distributor partnerships — access to their restaurant network in exchange for brand visibility
-- Premium venue analytics — detailed fan behavior reports for restaurants
 
 ---
 
