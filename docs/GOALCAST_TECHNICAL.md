@@ -64,13 +64,21 @@ Python AI Service (analysis, LLM narrative)
 ## Database Schema (core entities)
 
 ```
-users (id, email, name, team_favorite, venue_id, points_total, created_at)
-venues (id, name, address, contact_email, is_active, prize_description)
-matches (id, home_team, away_team, date, status, home_score, away_score)
+users (id, email, name, team_favorite, city, venue_id, points_total, created_at)
+venues (id, name, address, city, contact_email, is_active)
+matches (id, home_team, away_team, date, status, home_score, away_score, phase)
 predictions (id, user_id, match_id, predicted_home, predicted_away, winner_pick, points_earned)
+prize_dynamics (id, venue_id, type: match|weekly|phase|tournament, scope_ref, winner_user_id, announced_at)
 trivia_questions (id, match_id, question, options, correct_answer, points)
 trivia_answers (id, user_id, question_id, answer, is_correct, response_time_ms)
 ```
+
+### prize_dynamics notes
+- `type` defines the cadence the venue activated
+- `scope_ref` is the ID of the match, ISO week number, phase name, or null for tournament
+- `winner_user_id` is set when GoalCast calculates the winner after the scope ends
+- `announced_at` is when the push notification was sent to the winner
+- No prize description stored — venue handles fulfillment offline
 
 ---
 
@@ -108,17 +116,19 @@ trivia_answers (id, user_id, question_id, answer, is_correct, response_time_ms)
 
 **Must have:**
 - [ ] User registration + login (Google OAuth for low friction)
+- [ ] User profile includes city (free text, normalized via Nominatim on the frontend)
 - [ ] Venue list and selection
 - [ ] Fixture data (all 104 matches)
 - [ ] Prediction submission per match
 - [ ] Points calculation after match result
-- [ ] Leaderboard (global + per venue)
+- [ ] Leaderboard (global + per city + per venue)
+- [ ] Prize dynamics — calculate winner per activated dynamic, send push notification
 - [ ] Basic AI analysis per match (win probability)
 
 **Nice to have (add during tournament):**
 - [ ] Live trivia via WebSockets
 - [ ] Push notifications before each match
-- [ ] Venue dashboard (fan count per match)
+- [ ] Venue dashboard (fan count per match, prize dynamic winners)
 - [ ] Paid tier with Stripe
 
 **Post-tournament:**

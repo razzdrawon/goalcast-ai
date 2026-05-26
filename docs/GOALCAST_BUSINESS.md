@@ -1,5 +1,5 @@
 # GoalCast AI — Business Plan & Strategy
-> World Cup 2026 · Atlanta, GA · goalcastai.com
+> World Cup 2026 · Multi-city · goalcastai.com
 
 ---
 
@@ -35,7 +35,7 @@ AI-powered World Cup 2026 predictions platform. Fans predict match results, comp
 
 ### Restaurants (B2B)
 - **Free to join** — listed as Official Watch Party Venue in the app
-- **Sponsor the prize** — restaurant donates a dinner for two (~$80) as the tournament prize
+- **Define their own prizes** — venue decides what and when to give (per match, weekly, by phase, end of tournament). App announces the winner, venue delivers the prize offline
 - **Future:** featured placement fee ($99-299) once user base is validated
 
 ### Potential future revenue
@@ -48,10 +48,10 @@ AI-powered World Cup 2026 predictions platform. Fans predict match results, comp
 ## Value Proposition
 
 **To fans:**
-"Predict every World Cup match, compete with fans in Atlanta, win prizes at your favorite watch party venue."
+"Predict every World Cup match, compete with fans in your city, win prizes at your favorite watch party venue."
 
 **To restaurants:**
-"Know how many fans are coming to your venue before each match. Keep them engaged with live trivia for 90 minutes. Build loyalty that lasts beyond the tournament."
+"Know how many fans are coming to your venue before each match. Keep them engaged with live trivia for 90 minutes. We announce your winners — you deliver the prizes. Build loyalty that lasts beyond the tournament."
 
 **To distributors:**
 "Your brand appears as the official beer of GoalCast AI. Your restaurant clients have a reason to order more inventory. We drive fans to their locations."
@@ -60,11 +60,11 @@ AI-powered World Cup 2026 predictions platform. Fans predict match results, comp
 
 ## Target Market
 
-**Primary:** Latino community in Atlanta + general soccer fans
-**Secondary:** All Atlanta residents interested in the World Cup
-**Expansion:** Other World Cup host cities (NYC, LA, Dallas, Houston, Chicago, Miami)
+**Primary:** Latino community in Atlanta + CDMX + general soccer fans anywhere
+**Secondary:** Any city where a venue partner joins — app is city-agnostic from day one
+**Expansion:** Organic — fans self-report their city on sign-up, we follow the demand
 
-Atlanta context:
+Atlanta focus (initial outreach):
 - 8 matches at Mercedes-Benz Stadium including a Semifinal (July 15)
 - First match: Spain vs Cape Verde — June 15, 2026
 - Large Latino community with strong soccer culture
@@ -74,7 +74,7 @@ Atlanta context:
 
 ## Competitive Advantage
 
-1. **Local relevance** — Atlanta-first, not generic global app
+1. **Local relevance** — city-first leaderboards and venue partnerships, not generic global app
 2. **Restaurant partnerships** — real venues, real prizes, not virtual
 3. **AI depth** — eval frameworks, agent observability, not just API calls
 4. **Full tournament coverage** — all 104 matches, not just Atlanta games
@@ -135,6 +135,14 @@ Atlanta context:
 - Points may or may not be portable to other venues — TBD
 - Validation of physical presence TBD (QR scan, honor system, etc.)
 - These rules defined after first user feedback
+
+## Prize Dynamics (decided)
+- Venues choose which dynamics to activate: per match, per week, per phase, end of tournament
+- App calculates the leaderboard winner for each dynamic and announces it publicly
+- App sends push notification to winner: "You won — claim your prize at [Venue]"
+- App shows past winners per venue (e.g. "Jornada 3 winner at Bar El Golazo: @usuario")
+- **App does NOT store or display prize descriptions** — fans check with their venue directly
+- Physical fulfillment is 100% the venue's responsibility — keeps GoalCast legally clean
 
 ---
 

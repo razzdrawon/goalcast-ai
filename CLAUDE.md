@@ -81,13 +81,13 @@ goalcast-ai/
 
 ### Revenue Model
 - **Fans (B2C):** Free tier + $9.99 paid tier for full tournament AI analysis
-- **Venues (B2B):** Free to list, sponsor end-of-tournament prize (dinner for two ~$80)
+- **Venues (B2B):** Free to list — venue defines and delivers prizes offline, app announces winners
 - **Future:** Brand sponsorships (Heineken, Modelo), featured venue placement fees
 
 ### Target Markets
-- Atlanta, GA — 8 World Cup matches including Semifinal (July 15)
-- Mexico City — large soccer market, World Cup host country
-- Expanding to other host cities as venues are confirmed
+- Multi-city from launch — any city worldwide where fans register
+- Priority: Atlanta GA (8 matches + Semifinal), CDMX, and any city with venue partners
+- Fans self-report their city on sign-up (free text with Nominatim autocomplete)
 
 ### Current Pipeline
 - Actively reaching out to bars/restaurants in Atlanta and CDMX
@@ -100,6 +100,18 @@ goalcast-ai/
 - Jul 15 — Atlanta Semifinal
 - Jul 19 — World Cup Final
 
+### Prize Dynamics Model (decided)
+Venues define their own prize tiers offline — the app calculates winners and announces them.
+Four supported dynamics, venue can activate any combination:
+- **match** — winner per match day
+- **weekly** — winner per week
+- **phase** — winner per tournament phase (groups, round of 32, R16, QF, SF)
+- **tournament** — overall tournament winner
+
+App sends push notification to winner: "You won — go claim your prize at [Venue]."
+Physical prize fulfillment is 100% the venue's responsibility.
+App does NOT store prize descriptions or values — keeps it simple and legally clean.
+
 ---
 
 ## MVP Priority (build in this order)
@@ -108,12 +120,13 @@ goalcast-ai/
 2. **Fixture data integration** — football-data.org API for all 104 matches
 3. **Predictions system** — submit prediction per match, calculate points after result
 4. **Leaderboard** — global + per city + per venue
-5. **Stripe integration** — paid tier $9.99/tournament
-6. **AI match analysis** — pre-match win probability and narrative via OpenAI
-7. **WebSocket gateway** — real-time leaderboard updates
-8. **Live trivia** — questions during matches, real-time scoring
-9. **Venue dashboard** — fan count reports before each match
-10. **Push notifications** — Firebase FCM before each match
+5. **Prize dynamics** — calculate and announce winners per dynamic type (match/weekly/phase/tournament)
+6. **Push notifications** — Firebase FCM for winner announcements and pre-match reminders
+7. **Stripe integration** — paid tier $9.99/tournament
+8. **AI match analysis** — pre-match win probability and narrative via OpenAI
+9. **WebSocket gateway** — real-time leaderboard updates
+10. **Live trivia** — questions during matches, real-time scoring
+11. **Venue dashboard** — fan count reports before each match
 
 ---
 
