@@ -1146,6 +1146,27 @@
         <input type="email" placeholder="tu@email.com" required>
       </div>
       <div class="form-group">
+        <label>
+          <span class="t-en">Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.7rem">(optional)</span></span>
+          <span class="t-es">Teléfono <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);font-size:0.7rem">(opcional)</span></span>
+        </label>
+        <div class="phone-wrap">
+          <select class="phone-code-select" id="fan-phone-code" name="phone_code" aria-label="Country code">
+            <option value="+1">🇺🇸 +1</option>
+            <option value="+52">🇲🇽 +52</option>
+            <option value="+1-CA">🇨🇦 +1</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+34">🇪🇸 +34</option>
+            <option value="+54">🇦🇷 +54</option>
+            <option value="+55">🇧🇷 +55</option>
+            <option value="+57">🇨🇴 +57</option>
+            <option value="+51">🇵🇪 +51</option>
+            <option value="+56">🇨🇱 +56</option>
+          </select>
+          <input class="phone-number-input" type="tel" id="fan-phone-number" name="phone_number" placeholder="(404) 000-0000" autocomplete="tel-national">
+        </div>
+      </div>
+      <div class="form-group">
         <label><span class="t-en">Your City</span><span class="t-es">Tu Ciudad</span></label>
         <div class="autocomplete-wrap">
           <input type="text" class="city-input" placeholder="Atlanta, CDMX, Salt Lake City..." autocomplete="off" required>
@@ -1447,16 +1468,18 @@
     document.getElementById('btn-es').classList.toggle('active', lang === 'es');
 
     // Default phone country code if user hasn't manually changed it
-    const phoneCode = document.getElementById('phone-code');
-    if (phoneCode && !phoneCode.dataset.userPicked) {
-      phoneCode.value = lang === 'es' ? '+52' : '+1';
-      updatePhonePlaceholder(phoneCode.value);
-    }
+    ['phone-code', 'fan-phone-code'].forEach(id => {
+      const phoneCode = document.getElementById(id);
+      if (phoneCode && !phoneCode.dataset.userPicked) {
+        phoneCode.value = lang === 'es' ? '+52' : '+1';
+        updatePhonePlaceholder(phoneCode.value, id === 'fan-phone-code' ? 'fan-phone-number' : 'phone-number');
+      }
+    });
   }
 
   // Update placeholder to match selected country code
-  function updatePhonePlaceholder(code) {
-    const input = document.getElementById('phone-number');
+  function updatePhonePlaceholder(code, inputId) {
+    const input = document.getElementById(inputId || 'phone-number');
     if (!input) return;
     const placeholders = {
       '+1':    '(404) 000-0000',
@@ -1475,13 +1498,15 @@
 
   // Mark as user-picked when they manually change the code
   (function () {
-    const phoneCode = document.getElementById('phone-code');
-    if (phoneCode) {
-      phoneCode.addEventListener('change', () => {
-        phoneCode.dataset.userPicked = 'true';
-        updatePhonePlaceholder(phoneCode.value);
-      });
-    }
+    [['phone-code', 'phone-number'], ['fan-phone-code', 'fan-phone-number']].forEach(([selectId, inputId]) => {
+      const phoneCode = document.getElementById(selectId);
+      if (phoneCode) {
+        phoneCode.addEventListener('change', () => {
+          phoneCode.dataset.userPicked = 'true';
+          updatePhonePlaceholder(phoneCode.value, inputId);
+        });
+      }
+    });
   })();
 
   // Auto-detect on first visit: saved preference → browser language → default EN
