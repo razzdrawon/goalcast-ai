@@ -768,14 +768,86 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    nav { padding: 1rem; }
+
+    /* NAV */
+    nav { padding: 1rem 1.2rem; }
     .nav-links { display: none; }
-    .restaurant-inner { grid-template-columns: 1fr; gap: 2rem; }
-    .forms-section { grid-template-columns: 1fr; }
-    .match-card { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+
+    /* HERO */
+    .hero {
+      min-height: 90svh;
+      padding: 6rem 1.2rem 3rem;
+    }
+    .hero-sub { margin-bottom: 0.3rem; }
+    .hero-sub-es { margin-bottom: 2rem; }
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+      gap: 0.75rem;
+    }
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      text-align: center;
+      padding: 1rem 1.5rem;
+    }
+    .stats-bar {
+      gap: 1.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+    }
+    .stat-number { font-size: 2rem; }
+
+    /* SECTIONS */
+    .section { padding: 3rem 1.2rem; }
+    .section-title { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+    .section-sub { margin-bottom: 1.5rem; font-size: 0.9rem; }
+
+    /* HOW IT WORKS */
+    .how-grid { gap: 1rem; }
+    .how-card { padding: 1.5rem; }
+    .how-number { font-size: 3rem; margin-bottom: 0.5rem; }
+
+    /* MATCH CARDS */
+    .match-card {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      padding: 1rem;
+      gap: 0.5rem;
+    }
     .match-meta { grid-column: 1 / -1; text-align: left; }
     .match-vs { display: none; }
-    .stats-bar { gap: 2rem; }
+    .team-flag { font-size: 1.4rem; }
+    .team-name { font-size: 0.85rem; }
+
+    /* FOR BUSINESSES */
+    .restaurant-section {}
+    .restaurant-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 3rem 1.2rem;
+    }
+    .benefits-list { gap: 1rem; margin-top: 1.5rem; }
+    .partnership-card { padding: 1.5rem; }
+    .partnership-title { font-size: 1.6rem; }
+    .partnership-price { font-size: 2.5rem; }
+
+    /* FORMS — fix ordering: business form first on mobile so it flows
+       naturally after the business pitch section above */
+    .forms-section {
+      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
+      padding: 0 1.2rem 3rem;
+      gap: 1.5rem;
+    }
+    #business-form {
+      order: -1; /* pulls business form above fan form on mobile */
+    }
+    .form-card { padding: 1.5rem; }
+    .form-card h3 { font-size: 1.5rem; }
+
+    /* FOOTER */
+    footer { padding: 2rem 1.2rem; }
   }
 
   /* ── CITY AUTOCOMPLETE ── */
@@ -950,9 +1022,10 @@
   <h2 class="section-title t-en">Matches<br>in Your City.</h2>
   <h2 class="section-title t-es">Partidos<br>en tu Ciudad.</h2>
   <p class="section-sub t-en">GoalCast covers all 104 matches across every host city — example schedule from Atlanta</p>
-  <p class="section-sub t-es">GoalCast cubre los 104 partidos en todas las ciudades sede — ejemplo de partidos en Atlanta</p>
+  <p class="section-sub t-es">GoalCast cubre los 104 partidos en todas las ciudades sede — partidos en el Estadio Azteca, CDMX</p>
 
-  <div class="matches-grid">
+  <!-- Atlanta schedule (EN) -->
+  <div class="matches-grid" id="matches-atlanta">
     <div class="match-card">
       <div class="team"><div class="team-flag">🇪🇸</div><div class="team-name">Spain</div></div>
       <div class="match-vs">VS</div>
@@ -963,7 +1036,6 @@
         <div class="match-round">Group Stage</div>
       </div>
     </div>
-
     <div class="match-card">
       <div class="team"><div class="team-flag">🇿🇦</div><div class="team-name">South Africa</div></div>
       <div class="match-vs">VS</div>
@@ -974,7 +1046,6 @@
         <div class="match-round">Group Stage</div>
       </div>
     </div>
-
     <div class="match-card">
       <div class="team"><div class="team-flag">🇪🇸</div><div class="team-name">Spain</div></div>
       <div class="match-vs">VS</div>
@@ -985,7 +1056,6 @@
         <div class="match-round">Group Stage</div>
       </div>
     </div>
-
     <div class="match-card">
       <div class="team"><div class="team-flag">🇲🇦</div><div class="team-name">Morocco</div></div>
       <div class="match-vs">VS</div>
@@ -996,7 +1066,6 @@
         <div class="match-round">Group Stage</div>
       </div>
     </div>
-
     <div class="match-card">
       <div class="team"><div class="team-flag">🇨🇩</div><div class="team-name">Congo DR</div></div>
       <div class="match-vs">VS</div>
@@ -1007,7 +1076,6 @@
         <div class="match-round">Group Stage</div>
       </div>
     </div>
-
     <div class="match-card">
       <div class="team"><div class="team-flag">🏆</div><div class="team-name">TBD</div></div>
       <div class="match-vs">VS</div>
@@ -1018,7 +1086,6 @@
         <div class="match-round">Round of 32</div>
       </div>
     </div>
-
     <div class="match-card">
       <div class="team"><div class="team-flag">🏆</div><div class="team-name">TBD</div></div>
       <div class="match-vs">VS</div>
@@ -1029,7 +1096,6 @@
         <div class="match-round">Round of 16</div>
       </div>
     </div>
-
     <div class="match-card semifinal">
       <div class="team"><div class="team-flag">🔥</div><div class="team-name">TBD</div></div>
       <div class="match-vs">VS</div>
@@ -1038,6 +1104,60 @@
         <div class="match-date" style="color:var(--gold)">JUL 15</div>
         <div class="match-time">3:00 PM ET</div>
         <div class="match-round"><span class="semifinal-badge">⭐ Semifinal</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CDMX schedule (ES) -->
+  <div class="matches-grid" id="matches-cdmx" style="display:none">
+    <div class="match-card semifinal">
+      <div class="team"><div class="team-flag">🇲🇽</div><div class="team-name">México</div></div>
+      <div class="match-vs">VS</div>
+      <div class="team right"><div class="team-flag">🇿🇦</div><div class="team-name">Sudáfrica</div></div>
+      <div class="match-meta">
+        <div class="match-date" style="color:var(--gold)">JUN 11</div>
+        <div class="match-time">2:00 PM CT</div>
+        <div class="match-round"><span class="semifinal-badge">🌟 Partido Inaugural</span></div>
+      </div>
+    </div>
+    <div class="match-card">
+      <div class="team"><div class="team-flag">🇺🇿</div><div class="team-name">Uzbekistán</div></div>
+      <div class="match-vs">VS</div>
+      <div class="team right"><div class="team-flag">🇨🇴</div><div class="team-name">Colombia</div></div>
+      <div class="match-meta">
+        <div class="match-date">JUN 17</div>
+        <div class="match-time">9:00 PM CT</div>
+        <div class="match-round">Fase de Grupos</div>
+      </div>
+    </div>
+    <div class="match-card">
+      <div class="team"><div class="team-flag">🇨🇿</div><div class="team-name">Chequia</div></div>
+      <div class="match-vs">VS</div>
+      <div class="team right"><div class="team-flag">🇲🇽</div><div class="team-name">México</div></div>
+      <div class="match-meta">
+        <div class="match-date">JUN 24</div>
+        <div class="match-time">8:00 PM CT</div>
+        <div class="match-round">Fase de Grupos</div>
+      </div>
+    </div>
+    <div class="match-card">
+      <div class="team"><div class="team-flag">🏆</div><div class="team-name">TBD</div></div>
+      <div class="match-vs">VS</div>
+      <div class="team right"><div class="team-flag">🏆</div><div class="team-name">TBD</div></div>
+      <div class="match-meta">
+        <div class="match-date">JUN 30</div>
+        <div class="match-time">8:00 PM CT</div>
+        <div class="match-round">Ronda de 32</div>
+      </div>
+    </div>
+    <div class="match-card">
+      <div class="team"><div class="team-flag">🏆</div><div class="team-name">TBD</div></div>
+      <div class="match-vs">VS</div>
+      <div class="team right"><div class="team-flag">🏆</div><div class="team-name">TBD</div></div>
+      <div class="match-meta">
+        <div class="match-date">JUL 5</div>
+        <div class="match-time">7:00 PM CT</div>
+        <div class="match-round">Ronda de 16</div>
       </div>
     </div>
   </div>
@@ -1466,6 +1586,14 @@
     localStorage.setItem('gc-lang', lang);
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+
+    // Switch match schedule grid by city
+    const atl = document.getElementById('matches-atlanta');
+    const cdmx = document.getElementById('matches-cdmx');
+    if (atl && cdmx) {
+      atl.style.display = lang === 'es' ? 'none' : '';
+      cdmx.style.display = lang === 'es' ? '' : 'none';
+    }
 
     // Default phone country code if user hasn't manually changed it
     ['phone-code', 'fan-phone-code'].forEach(id => {
