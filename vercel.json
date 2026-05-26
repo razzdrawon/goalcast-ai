@@ -1,3 +1,4 @@
 {
-  "rootDirectory": "landing"
+  "rootDirectory": "landing",
+  "cleanUrls": true
 }
