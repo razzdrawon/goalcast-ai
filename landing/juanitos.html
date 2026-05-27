@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juanito's Bar · Mundial 2026 · GoalCast AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-deep: #0a1410;
+  --bg-card: #11201a;
+  --bg-elevated: #16271f;
+  --green-line: #1f3a2e;
+  --green-accent: #2d5b46;
+  --gold: #c8a35c;
+  --gold-soft: #a18649;
+  --gold-faint: rgba(200, 163, 92, 0.12);
+  --cream: #f4ecd8;
+  --cream-muted: #d4c8a8;
+  --text-primary: #f4ecd8;
+  --text-secondary: #a8a395;
+  --text-tertiary: #6e6a5e;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(45, 91, 70, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 60%, rgba(200, 163, 92, 0.06) 0%, transparent 50%);
+}
+
+.serif {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header explicativo */
+.page-header {
+  text-align: center;
+  padding: 40px 20px 60px;
+  border-bottom: 1px solid var(--green-line);
+  margin-bottom: 60px;
+}
+
+.page-header .label {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.page-header h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.page-header h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.page-header p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Grid de screens */
+.screens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 48px;
+  margin-bottom: 80px;
+}
+
+.screen-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.screen-label {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gold-soft);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.screen-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.screen-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 24px;
+  max-width: 280px;
+}
+
+/* Mobile frame */
+.phone {
+  width: 320px;
+  background: var(--bg-card);
+  border: 1px solid var(--green-line);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(200, 163, 92, 0.08);
+}
+
+.notch {
+  height: 24px;
+  background: var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  font-size: 10px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+}
+
+/* App header */
+.app-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--green-line);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--bg-deep);
+  font-style: italic;
+}
+
+.brand-name {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.brand-sub {
+  font-size: 10px;
+  color: var(--gold-soft);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Screen 1: Home */
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold-soft);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.featured-match {
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(45, 91, 70, 0.25) 0%, rgba(45, 91, 70, 0.05) 100%);
+  border: 1px solid var(--green-accent);
+  border-radius: 16px;
+  margin: 0 16px 16px;
+}
+
+.match-time-label {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.match-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.team {
+  flex: 1;
+  text-align: center;
+}
+
+.team-flag {
+  font-size: 36px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.team-name {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.vs-divider {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--gold);
+  padding: 0 12px;
+}
+
+.match-venue {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: center;
+  font-style: italic;
+}
+
+.btn-primary {
+  width: calc(100% - 32px);
+  margin: 0 16px 20px;
+  padding: 14px;
+  background: var(--gold);
+  color: var(--bg-deep);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: block;
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid var(--gold-soft);
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Upcoming list */
+.upcoming-section {
+  padding: 4px 20px 20px;
+}
+
+.upcoming-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.match-row {
+  padding: 12px 14px;
+  background: var(--bg-elevated);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.match-row-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.match-row-teams {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.match-row-time {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.chevron {
+  color: var(--text-tertiary);
+  font-size: 16px;
+}
+
+/* Tab bar */
+.tab-bar {
+  border-top: 1px solid var(--green-line);
+  display: flex;
+  padding: 10px 0 14px;
+  background: var(--bg-deep);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+}
+
+.tab.active { color: var(--gold); }
+
+.tab-icon {
+  font-size: 18px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Screen 2: Match detail */
+.detail-hero {
+  padding: 28px 20px 24px;
+  background: linear-gradient(180deg, rgba(45, 91, 70, 0.4) 0%, transparent 100%);
+  text-align: center;
+  border-bottom: 1px solid var(--green-line);
+}
+
+.detail-stage {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.detail-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.detail-team-flag {
+  font-size: 44px;
+  line-height: 1;
+}
+
+.detail-team-name {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.detail-team-sub {
+  font-size: 10px;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.detail-vs {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 24px;
+  color: var(--gold);
+}
+
+.detail-meta {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* AI analysis card */
+.ai-section {
+  padding: 24px 20px 20px;
+}
+
+.ai-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.ai-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.ai-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.ai-timestamp {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.ai-enfoque {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.ai-text {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--cream-muted);
+}
+
+.ai-text strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.ai-prediction {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: var(--gold-faint);
+  border: 1px solid rgba(200, 163, 92, 0.25);
+  border-radius: 12px;
+}
+
+.ai-prediction-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.ai-prediction-value {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.premium-cta {
+  margin: 16px 0 0;
+  padding: 14px 16px;
+  border: 1px dashed var(--gold-soft);
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.premium-cta-text {
+  flex: 1;
+}
+
+.premium-cta-title {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+
+.premium-cta-sub {
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.premium-cta-arrow {
+  color: var(--gold);
+  font-size: 18px;
+}
+
+/* Screen 3: Form */
+.form-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--green-line);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-back {
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+.form-title {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.form-body {
+  padding: 20px;
+}
+
+.prediction-input {
+  background: var(--bg-elevated);
+  border: 1px solid var(--green-line);
+  border-radius: 14px;
+  padding: 20px 16px;
+  margin-bottom: 20px;
+}
+
+.prediction-input-label {
+  text-align: center;
+  font-size: 10px;
+  color: var(--gold-soft);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.score-team {
+  flex: 1;
+  text-align: center;
+}
+
+.score-team-flag {
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.score-team-name {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.score-input {
+  width: 64px;
+  height: 56px;
+  background: var(--bg-deep);
+  border: 1px solid var(--gold-soft);
+  border-radius: 10px;
+  text-align: center;
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.score-dash {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  color: var(--text-tertiary);
+  padding: 0 4px;
+}
+
+.form-field {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--green-line);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold-soft);
+}
+
+.form-info {
+  padding: 12px 14px;
+  background: rgba(200, 163, 92, 0.08);
+  border-left: 2px solid var(--gold);
+  border-radius: 4px;
+  margin-bottom: 18px;
+  font-size: 11px;
+  color: var(--cream-muted);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Screen 4: Leaderboard */
+.lb-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--green-line);
+  text-align: center;
+}
+
+.lb-trophy {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.lb-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.lb-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.lb-progress {
+  padding: 14px 20px;
+  background: var(--bg-elevated);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--green-line);
+}
+
+.lb-progress-label {
+  font-size: 10px;
+  color: var(--text-secondary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.lb-progress-value {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.lb-list {
+  padding: 8px 0;
+}
+
+.lb-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 14px;
+}
+
+.lb-rank {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.lb-rank-1 {
+  background: var(--gold);
+  color: var(--bg-deep);
+}
+
+.lb-rank-2 {
+  background: rgba(200, 163, 92, 0.5);
+  color: var(--bg-deep);
+}
+
+.lb-rank-3 {
+  background: rgba(200, 163, 92, 0.25);
+  color: var(--gold);
+}
+
+.lb-rank-default {
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.lb-row-info {
+  flex: 1;
+}
+
+.lb-row-name {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lb-row-stats {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.lb-row-points {
+  text-align: right;
+}
+
+.lb-points-value {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.lb-points-label {
+  font-size: 9px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.lb-divider {
+  border-top: 1px dashed var(--green-line);
+  margin: 6px 20px;
+}
+
+.lb-row-you {
+  background: rgba(200, 163, 92, 0.06);
+  border-left: 2px solid var(--gold);
+  padding-left: 18px;
+}
+
+.lb-row-you .lb-row-name,
+.lb-row-you .lb-points-value {
+  color: var(--gold);
+}
+
+.lb-you-badge {
+  font-size: 9px;
+  background: var(--gold);
+  color: var(--bg-deep);
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.1em;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+}
+
+.premium-badge {
+  display: inline-block;
+  font-size: 9px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  font-family: 'Inter', sans-serif;
+}
+
+.lb-prize {
+  margin: 16px 20px 24px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(200, 163, 92, 0.1) 0%, rgba(200, 163, 92, 0.02) 100%);
+  border: 1px solid rgba(200, 163, 92, 0.2);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.lb-prize-label {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.lb-prize-text {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.5;
+}
+
+/* Closing section */
+.closing {
+  border-top: 1px solid var(--green-line);
+  padding: 60px 20px 40px;
+  text-align: center;
+  max-width: 680px;
+  margin: 80px auto 0;
+}
+
+.closing-label {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.closing h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.closing h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.closing p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+  text-align: left;
+}
+
+.feature {
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--green-line);
+  border-radius: 12px;
+}
+
+.feature-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.feature h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.feature p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.multiplier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.mult-card {
+  padding: 28px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--green-line);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.mult-card-highlight {
+  border-color: rgba(200, 163, 92, 0.3);
+  background: linear-gradient(180deg, rgba(200, 163, 92, 0.05) 0%, var(--bg-card) 100%);
+}
+
+.mult-card-gold {
+  border-color: var(--gold-soft);
+  background: linear-gradient(180deg, rgba(200, 163, 92, 0.12) 0%, var(--bg-card) 100%);
+}
+
+.mult-tier {
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.mult-value {
+  font-family: 'Fraunces', serif;
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.mult-card-gold .mult-value {
+  font-style: italic;
+}
+
+.mult-label {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .page-header h1 { font-size: 36px; }
+  .closing h2 { font-size: 26px; }
+  .phone { width: 100%; max-width: 320px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="page-header">
+    <div class="label">Una experiencia exclusiva</div>
+    <h1>Vive el <em>Mundial</em> en Juanito's Bar.</h1>
+    <p>Una plataforma donde cada mesa juega como equipo: predicen juntos, comparten análisis y suben en el ranking del restaurante. Entre más consume la mesa, más puntos suman. Diseñada para que tus comensales vuelvan partido tras partido.</p>
+  </header>
+
+  <div class="screens-grid">
+
+    <div class="screen-block">
+      <div class="screen-label">Pantalla 01</div>
+      <div class="screen-title">El inicio</div>
+      <div class="screen-desc">El comensal escanea el QR en su mesa y aterriza directo en el partido del día.</div>
+
+      <div class="phone">
+        <div class="notch">
+          <span>9:41</span>
+          <span>●●●●●</span>
+        </div>
+
+        <div class="app-header">
+          <div class="brand-mark">J</div>
+          <div>
+            <div class="brand-name">Juanito's Bar</div>
+            <div class="brand-sub">Mundial 2026</div>
+          </div>
+        </div>
+
+        <div style="padding: 20px 20px 12px;">
+          <div class="section-label">Partido de hoy · 8:00 PM</div>
+        </div>
+
+        <div class="featured-match">
+          <div class="match-time-label">Partido inaugural</div>
+          <div class="match-teams">
+            <div class="team">
+              <div class="team-flag">🇲🇽</div>
+              <div class="team-name">México</div>
+            </div>
+            <div class="vs-divider">vs</div>
+            <div class="team">
+              <div class="team-flag">🇿🇦</div>
+              <div class="team-name">Sudáfrica</div>
+            </div>
+          </div>
+          <div class="match-venue">Estadio Azteca · Ciudad de México</div>
+        </div>
+
+        <button class="btn-primary">Predecir este partido</button>
+
+        <div class="upcoming-section">
+          <div class="section-label">Próximos días</div>
+          <div class="upcoming-list">
+            <div class="match-row">
+              <div class="match-row-info">
+                <div class="match-row-teams">🇺🇸 USA · 🇵🇾 Paraguay</div>
+                <div class="match-row-time">Jueves 12 jun · 7:00 PM</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+            <div class="match-row">
+              <div class="match-row-info">
+                <div class="match-row-teams">🇨🇦 Canadá · 🏴 Escocia</div>
+                <div class="match-row-time">Viernes 13 jun · 4:00 PM</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+            <div class="match-row">
+              <div class="match-row-info">
+                <div class="match-row-teams">🇪🇸 España · 🇨🇻 Cabo Verde</div>
+                <div class="match-row-time">Domingo 15 jun · 2:00 PM</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab active">
+            <span class="tab-icon">⌂</span>
+            Inicio
+          </div>
+          <div class="tab">
+            <span class="tab-icon">⊞</span>
+            Partidos
+          </div>
+          <div class="tab">
+            <span class="tab-icon">♛</span>
+            Ranking
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen-block">
+      <div class="screen-label">Pantalla 02</div>
+      <div class="screen-title">El análisis</div>
+      <div class="screen-desc">Cada partido viene con un análisis curado por GoalCast AI, escrito como editorial de revista.</div>
+
+      <div class="phone">
+        <div class="notch">
+          <span>9:41</span>
+          <span>●●●●●</span>
+        </div>
+
+        <div class="form-header">
+          <span class="form-back">‹</span>
+          <span class="form-title">Partido inaugural</span>
+        </div>
+
+        <div class="detail-hero">
+          <div class="detail-stage">Grupo A · Fecha 1</div>
+          <div class="detail-teams">
+            <div class="team">
+              <div class="detail-team-flag">🇲🇽</div>
+              <div class="detail-team-name">México</div>
+              <div class="detail-team-sub">Anfitrión</div>
+            </div>
+            <div class="detail-vs">vs</div>
+            <div class="team">
+              <div class="detail-team-flag">🇿🇦</div>
+              <div class="detail-team-name">Sudáfrica</div>
+              <div class="detail-team-sub">CAF</div>
+            </div>
+          </div>
+          <div class="detail-meta">11 de junio · 8:00 PM · Estadio Azteca</div>
+        </div>
+
+        <div class="ai-section">
+          <div class="ai-header">
+            <div class="ai-badge">
+              <div class="ai-dot"></div>
+              <div class="ai-label">Goalcast AI</div>
+            </div>
+            <div class="ai-timestamp">actualizado hoy</div>
+          </div>
+
+          <div class="ai-enfoque">Enfoque: el peso del Azteca</div>
+
+          <div class="ai-text">
+            <strong>México llega al inaugural con la presión del anfitrión sobre los hombros</strong>, en un Azteca que ha visto historia desde 1970. Aguirre ha priorizado solidez sobre brillantez, con Edson Álvarez como ancla y Santi Giménez liderando el ataque. Sudáfrica regresa después de años, con velocidad por bandas y la disciplina táctica de Hugo Broos. El factor que pocos consideran: <strong>2,250 metros de altura</strong>, un detalle que pesa cuando no estás aclimatado.
+          </div>
+
+          <div class="ai-prediction">
+            <div class="ai-prediction-label">Predicción AI</div>
+            <div class="ai-prediction-value">México 2 — 0 Sudáfrica</div>
+          </div>
+
+          <div class="premium-cta">
+            <div class="premium-cta-text">
+              <div class="premium-cta-title">Desbloquea 9 enfoques más</div>
+              <div class="premium-cta-sub">Premium $99 MXN · todo el torneo</div>
+            </div>
+            <span class="premium-cta-arrow">→</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen-block">
+      <div class="screen-label">Pantalla 03</div>
+      <div class="screen-title">La mesa juega</div>
+      <div class="screen-desc">Una persona registra al grupo, todos juegan juntos. Sin cuentas, sin contraseñas.</div>
+
+      <div class="phone">
+        <div class="notch">
+          <span>9:41</span>
+          <span>●●●●●</span>
+        </div>
+
+        <div class="form-header">
+          <span class="form-back">✕</span>
+          <span class="form-title">Registrar mesa</span>
+        </div>
+
+        <div class="form-body">
+          <div class="prediction-input">
+            <div class="prediction-input-label">México vs Sudáfrica · 11 jun</div>
+            <div class="score-row">
+              <div class="score-team">
+                <div class="score-team-flag">🇲🇽</div>
+                <div class="score-team-name">México</div>
+                <input type="number" class="score-input" value="2" min="0" max="20">
+              </div>
+              <div class="score-dash">—</div>
+              <div class="score-team">
+                <div class="score-team-flag">🇿🇦</div>
+                <div class="score-team-name">Sudáfrica</div>
+                <input type="number" class="score-input" value="0" min="0" max="20">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label">Nombre de la mesa</label>
+            <input type="text" class="form-input" value="Los Domingueros" placeholder="Ej. Familia Pérez">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label">Tu correo (organizador)</label>
+            <input type="email" class="form-input" value="juan@ejemplo.com">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label">Personas en la mesa</label>
+            <input type="number" class="form-input" value="5" min="1" max="8">
+          </div>
+
+          <div class="form-info">
+            La mesa juega como equipo. Máximo 8 personas. Pueden volver otro día con el mismo correo.
+          </div>
+
+          <button class="btn-primary" style="width: 100%; margin: 0;">Guardar predicción</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen-block">
+      <div class="screen-label">Pantalla 04</div>
+      <div class="screen-title">El ranking</div>
+      <div class="screen-desc">Las mesas compiten entre sí. Más consumo, más puntos, más visible en pantalla.</div>
+
+      <div class="phone">
+        <div class="notch">
+          <span>9:41</span>
+          <span>●●●●●</span>
+        </div>
+
+        <div class="lb-header">
+          <div class="lb-trophy">Ranking de mesas</div>
+          <div class="lb-title">Juanito's Bar</div>
+          <div class="lb-sub">Mundial 2026 · acumulado</div>
+        </div>
+
+        <div class="lb-progress">
+          <div class="lb-progress-label">Partidos jugados</div>
+          <div class="lb-progress-value">8 / 104</div>
+        </div>
+
+        <div class="lb-list">
+
+          <div class="lb-row">
+            <div class="lb-rank lb-rank-1">1</div>
+            <div class="lb-row-info">
+              <div class="lb-row-name">
+                Los Domingueros
+                <span class="premium-badge">PREMIUM</span>
+              </div>
+              <div class="lb-row-stats">6 personas · ticket prom. $720</div>
+            </div>
+            <div class="lb-row-points">
+              <div class="lb-points-value">46</div>
+              <div class="lb-points-label">pts</div>
+            </div>
+          </div>
+
+          <div class="lb-row">
+            <div class="lb-rank lb-rank-2">2</div>
+            <div class="lb-row-info">
+              <div class="lb-row-name">Familia Ramírez</div>
+              <div class="lb-row-stats">4 personas · ticket prom. $580</div>
+            </div>
+            <div class="lb-row-points">
+              <div class="lb-points-value">38</div>
+              <div class="lb-points-label">pts</div>
+            </div>
+          </div>
+
+          <div class="lb-row">
+            <div class="lb-rank lb-rank-3">3</div>
+            <div class="lb-row-info">
+              <div class="lb-row-name">
+                Los Compadres
+                <span class="premium-badge">PREMIUM</span>
+              </div>
+              <div class="lb-row-stats">5 personas · ticket prom. $640</div>
+            </div>
+            <div class="lb-row-points">
+              <div class="lb-points-value">33</div>
+              <div class="lb-points-label">pts</div>
+            </div>
+          </div>
+
+          <div class="lb-divider"></div>
+
+          <div class="lb-row lb-row-you">
+            <div class="lb-rank lb-rank-default">7</div>
+            <div class="lb-row-info">
+              <div class="lb-row-name">
+                Mesa de Juan P.
+                <span class="lb-you-badge">tu mesa</span>
+              </div>
+              <div class="lb-row-stats">5 personas · ticket prom. $390</div>
+            </div>
+            <div class="lb-row-points">
+              <div class="lb-points-value">18</div>
+              <div class="lb-points-label">pts</div>
+            </div>
+          </div>
+
+          <div class="lb-row">
+            <div class="lb-rank lb-rank-default">8</div>
+            <div class="lb-row-info">
+              <div class="lb-row-name">Las Comadres</div>
+              <div class="lb-row-stats">3 personas · ticket prom. $310</div>
+            </div>
+            <div class="lb-row-points">
+              <div class="lb-points-value">15</div>
+              <div class="lb-points-label">pts</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="lb-prize">
+          <div class="lb-prize-label">El premio</div>
+          <div class="lb-prize-text">"Cena para ocho personas en Juanito's Bar a la mesa ganadora del Mundial."</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="closing">
+    <div class="closing-label">Cómo sube el ticket promedio</div>
+    <h2>Entre más consume la mesa, <em>más puntos</em> ganan.</h2>
+    <p>Al final del partido, el mesero introduce el código de la mesa y el monto del ticket. La app multiplica los puntos según el consumo. La mesa se queda más tiempo, pide otra ronda, sube en el ranking.</p>
+
+    <div class="multiplier-grid">
+      <div class="mult-card">
+        <div class="mult-tier">Hasta $399</div>
+        <div class="mult-value">1×</div>
+        <div class="mult-label">Puntos normales</div>
+      </div>
+      <div class="mult-card mult-card-highlight">
+        <div class="mult-tier">$400 — $699</div>
+        <div class="mult-value">1.5×</div>
+        <div class="mult-label">Multiplicador medio</div>
+      </div>
+      <div class="mult-card mult-card-gold">
+        <div class="mult-tier">$700 o más</div>
+        <div class="mult-value">2×</div>
+        <div class="mult-label">Multiplicador máximo</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" style="border-top: none; padding-top: 0; margin-top: 0;">
+    <div class="closing-label">Lo que incluye</div>
+    <h2>Un Mundial diseñado <em>a la medida</em> de tu restaurante.</h2>
+    <p>Marca personalizada, dominio propio, análisis AI que se actualizan diariamente, base de datos de tus comensales y operación llave en mano durante los 39 días del torneo.</p>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="feature-num">01</div>
+        <h3>Sube el ticket promedio</h3>
+        <p>Multiplicador de puntos por consumo de la mesa. Validación rápida por el mesero al cobrar.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-num">02</div>
+        <h3>Marca propia</h3>
+        <p>Logo, paleta y nombre del restaurante en cada pantalla. URL personalizada incluida.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-num">03</div>
+        <h3>Análisis AI diario</h3>
+        <p>104 partidos con análisis editorial actualizado considerando resultados del torneo.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-num">04</div>
+        <h3>Tu base de datos</h3>
+        <p>Captura los grupos de comensales que vuelven al restaurante. Tuya para siempre.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>
