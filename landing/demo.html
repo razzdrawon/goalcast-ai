@@ -5,1104 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GoalCast AI — App Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --black: #080a0c;
-    --surface: #0e1218;
-    --card: #141a22;
-    --border: #1c2530;
-    --green: #00e676;
-    --gold: #ffd600;
-    --white: #f0f4f8;
-    --muted: #6b7a8d;
-    --red: #ff4444;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: #0a0e14;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    font-family: 'DM Sans', sans-serif;
-    padding: 2rem 1rem;
-  }
-
-  /* Desktop wrapper */
-  .demo-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 420px;
-  }
-
-  .demo-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    color: var(--white);
-    letter-spacing: 0.05em;
-    text-align: center;
-  }
-
-  .demo-label span { color: var(--green); }
-
-  .demo-sublabel {
-    font-size: 0.8rem;
-    color: var(--muted);
-    text-align: center;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-top: -1rem;
-  }
-
-  /* Phone frame */
-  .phone {
-    width: 375px;
-    height: 720px;
-    background: var(--black);
-    border-radius: 40px;
-    border: 2px solid #2a3442;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
-  }
-
-  /* Notch */
-  .phone::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 28px;
-    background: #080a0c;
-    border-radius: 0 0 20px 20px;
-    z-index: 100;
-  }
-
-  /* Screens container */
-  .screens {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .screen {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    transform: translateX(100%);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  .screen.active {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  .screen.exit {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-
-  /* Status bar */
-  .status-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 1.5rem 0.5rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--white);
-    flex-shrink: 0;
-  }
-
-  .status-time { font-size: 0.85rem; font-weight: 700; }
-  .status-icons { display: flex; gap: 0.3rem; align-items: center; }
-
-  /* App header */
-  .app-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 1.2rem 1rem;
-    flex-shrink: 0;
-  }
-
-  .app-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
-    color: var(--white);
-    letter-spacing: 0.05em;
-  }
-
-  .app-logo span { color: var(--green); }
-
-  .app-notif {
-    width: 32px; height: 32px;
-    background: var(--surface);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-    position: relative;
-  }
-
-  .notif-dot {
-    position: absolute;
-    top: 4px; right: 4px;
-    width: 8px; height: 8px;
-    background: var(--green);
-    border-radius: 50%;
-    border: 2px solid var(--black);
-  }
-
-  /* Screen content */
-  .screen-content {
-    flex: 1;
-    padding: 0 1.2rem 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  /* Match banner */
-  .match-banner {
-    background: linear-gradient(135deg, #0a1628 0%, #0d2040 100%);
-    border: 1px solid rgba(0,230,118,0.2);
-    border-radius: 16px;
-    padding: 1.2rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .match-banner::before {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 100px; height: 100px;
-    background: rgba(0,230,118,0.05);
-    border-radius: 50%;
-  }
-
-  .match-tag {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .match-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--green);
-    border-radius: 50%;
-    animation: pulse 1.5s infinite;
-  }
-
-  .match-teams {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .match-team {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-  }
-
-  .match-flag { font-size: 2.2rem; }
-
-  .match-team-name {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--white);
-    text-align: center;
-  }
-
-  .match-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
-  }
-
-  .match-vs-text {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    color: var(--muted);
-  }
-
-  .match-time-text {
-    font-size: 0.65rem;
-    color: var(--muted);
-    text-align: center;
-  }
-
-  .match-date-text {
-    font-size: 0.7rem;
-    color: var(--green);
-    font-weight: 700;
-  }
-
-  /* Predict CTA */
-  .predict-cta {
-    background: var(--green);
-    color: var(--black);
-    border: none;
-    border-radius: 12px;
-    padding: 0.8rem;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    width: 100%;
-    margin-top: 0.8rem;
-    cursor: pointer;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    transition: all 0.2s;
-  }
-
-  .predict-cta:active { transform: scale(0.97); }
-
-  /* AI insight */
-  .ai-insight {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1rem;
-  }
-
-  .ai-insight-label {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .ai-insight-text {
-    font-size: 0.8rem;
-    color: #94a3b8;
-    line-height: 1.5;
-  }
-
-  .ai-insight-text strong { color: var(--white); }
-
-  /* Stats row */
-  .stats-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-  }
-
-  .stat-mini {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.8rem 0.5rem;
-    text-align: center;
-  }
-
-  .stat-mini-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    color: var(--green);
-    line-height: 1;
-  }
-
-  .stat-mini-label {
-    font-size: 0.6rem;
-    color: var(--muted);
-    margin-top: 0.2rem;
-    letter-spacing: 0.05em;
-  }
-
-  /* ── PREDICT SCREEN ── */
-  .predict-header {
-    padding: 0 1.2rem 0.5rem;
-    flex-shrink: 0;
-  }
-
-  .back-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--muted);
-    font-size: 0.8rem;
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    padding: 0;
-  }
-
-  .predict-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .predict-sub {
-    font-size: 0.75rem;
-    color: var(--muted);
-    font-style: italic;
-  }
-
-  .predict-matchup {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.2rem;
-    margin: 0 0 0.5rem;
-  }
-
-  .predict-team {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-  }
-
-  .predict-flag { font-size: 2.5rem; }
-  .predict-name { font-size: 0.8rem; font-weight: 700; }
-
-  .predict-odds {
-    font-size: 0.65rem;
-    color: var(--green);
-    font-weight: 600;
-  }
-
-  /* Score selector */
-  .score-selector {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1rem;
-  }
-
-  .score-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-align: center;
-    margin-bottom: 0.8rem;
-  }
-
-  .score-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .score-control {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .score-btn {
-    width: 36px; height: 36px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    color: var(--white);
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.15s;
-  }
-
-  .score-btn:active { background: var(--green); color: var(--black); }
-
-  .score-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: var(--white);
-    min-width: 2rem;
-    text-align: center;
-    line-height: 1;
-  }
-
-  .score-dash {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: var(--muted);
-  }
-
-  /* Winner selector */
-  .winner-selector {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-  }
-
-  .winner-btn {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.7rem 0.5rem;
-    color: var(--muted);
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .winner-btn.selected {
-    background: rgba(0,230,118,0.1);
-    border-color: var(--green);
-    color: var(--green);
-  }
-
-  .winner-btn:active { transform: scale(0.95); }
-
-  .ai-pred-badge {
-    font-size: 0.55rem;
-    background: rgba(0,230,118,0.15);
-    color: var(--green);
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
-    display: block;
-    margin-top: 0.2rem;
-    letter-spacing: 0.06em;
-  }
-
-  .submit-predict {
-    background: var(--green);
-    color: var(--black);
-    border: none;
-    border-radius: 12px;
-    padding: 1rem;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    width: 100%;
-    cursor: pointer;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    transition: all 0.2s;
-  }
-
-  .submit-predict:active { transform: scale(0.97); }
-
-  /* ── LEADERBOARD SCREEN ── */
-  .leaderboard-header {
-    background: linear-gradient(135deg, #0a1628, #0d2040);
-    padding: 0 1.2rem 1.2rem;
-    flex-shrink: 0;
-  }
-
-  .lb-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    margin-top: 0.3rem;
-  }
-
-  .lb-sub {
-    font-size: 0.7rem;
-    color: var(--muted);
-  }
-
-  .lb-sponsor {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(255,214,0,0.1);
-    border: 1px solid rgba(255,214,0,0.3);
-    border-radius: 8px;
-    padding: 0.5rem 0.8rem;
-    margin-top: 0.8rem;
-  }
-
-  .lb-sponsor-text {
-    font-size: 0.65rem;
-    color: var(--gold);
-    line-height: 1.3;
-  }
-
-  .lb-sponsor-text strong { display: block; font-size: 0.7rem; }
-
-  .lb-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem 1.2rem;
-  }
-
-  .lb-item {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 0.8rem 1rem;
-    transition: all 0.2s;
-  }
-
-  .lb-item.me {
-    border-color: var(--green);
-    background: rgba(0,230,118,0.05);
-  }
-
-  .lb-rank {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    color: var(--muted);
-    min-width: 1.5rem;
-    text-align: center;
-  }
-
-  .lb-rank.gold { color: var(--gold); }
-  .lb-rank.silver { color: #94a3b8; }
-  .lb-rank.bronze { color: #cd7c2f; }
-
-  .lb-avatar {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem;
-    background: var(--card);
-    flex-shrink: 0;
-  }
-
-  .lb-info { flex: 1; }
-
-  .lb-name {
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
-
-  .lb-venue {
-    font-size: 0.65rem;
-    color: var(--muted);
-  }
-
-  .lb-points {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.3rem;
-    color: var(--green);
-  }
-
-  .me-badge {
-    font-size: 0.55rem;
-    background: var(--green);
-    color: var(--black);
-    padding: 0.1rem 0.4rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    border-radius: 4px;
-    margin-left: 0.3rem;
-  }
-
-  /* ── TRIVIA SCREEN ── */
-  .trivia-live-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: rgba(255,68,68,0.15);
-    border: 1px solid rgba(255,68,68,0.4);
-    color: var(--red);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 0.3rem 0.7rem;
-    border-radius: 20px;
-    text-transform: uppercase;
-  }
-
-  .trivia-live-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--red);
-    border-radius: 50%;
-    animation: pulse 1s infinite;
-  }
-
-  .trivia-match-score {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 0.8rem;
-  }
-
-  .score-display {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: var(--white);
-    letter-spacing: 0.1em;
-  }
-
-  .score-teams {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
-    flex: 1;
-  }
-
-  .score-team-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-  }
-
-  .score-team-row.right { flex-direction: row-reverse; }
-
-  .score-flag { font-size: 1.2rem; }
-  .score-tname { font-size: 0.75rem; font-weight: 600; }
-
-  .trivia-timer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-  .timer-circle {
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    background: conic-gradient(var(--red) var(--progress, 75%), var(--surface) 0);
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-  }
-
-  .timer-inner {
-    width: 36px; height: 36px;
-    background: var(--black);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem;
-    color: var(--red);
-  }
-
-  .trivia-question {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.2rem;
-  }
-
-  .trivia-q-label {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.6rem;
-  }
-
-  .trivia-q-text {
-    font-size: 0.95rem;
-    font-weight: 600;
-    line-height: 1.4;
-    margin-bottom: 1rem;
-  }
-
-  .trivia-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .trivia-option {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.7rem 1rem;
-    font-size: 0.82rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: left;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .trivia-option:active, .trivia-option.selected {
-    background: rgba(0,230,118,0.1);
-    border-color: var(--green);
-    color: var(--green);
-  }
-
-  .trivia-option.wrong {
-    background: rgba(255,68,68,0.1);
-    border-color: var(--red);
-    color: var(--red);
-  }
-
-  .option-letter {
-    width: 22px; height: 22px;
-    background: var(--surface);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.65rem;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  /* ── PRIZE SCREEN ── */
-  .prize-screen {
-    background: linear-gradient(135deg, #0a0e14 0%, #0d1a10 50%, #0a0e14 100%);
-  }
-
-  .prize-confetti {
-    text-align: center;
-    font-size: 3rem;
-    padding: 1rem 0;
-    animation: bounce 1s ease infinite alternate;
-  }
-
-  @keyframes bounce {
-    from { transform: translateY(0); }
-    to { transform: translateY(-8px); }
-  }
-
-  .prize-card {
-    background: linear-gradient(135deg, rgba(255,214,0,0.1), rgba(255,214,0,0.05));
-    border: 1px solid rgba(255,214,0,0.4);
-    border-radius: 20px;
-    padding: 1.5rem;
-    text-align: center;
-  }
-
-  .prize-sponsor-label {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-  }
-
-  .prize-venue-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    color: var(--gold);
-    margin-bottom: 0.3rem;
-  }
-
-  .prize-description {
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-
-  .prize-value {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
-    color: var(--white);
-    line-height: 1;
-  }
-
-  .prize-value-label {
-    font-size: 0.7rem;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-
-  .prize-venue-details {
-    background: rgba(0,0,0,0.3);
-    border-radius: 10px;
-    padding: 0.8rem;
-    font-size: 0.75rem;
-    color: #94a3b8;
-    line-height: 1.6;
-  }
-
-  .your-rank {
-    background: var(--surface);
-    border: 1px solid var(--green);
-    border-radius: 12px;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .your-rank-label { font-size: 0.75rem; color: var(--muted); }
-
-  .your-rank-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    color: var(--green);
-    line-height: 1;
-  }
-
-  .your-rank-pts {
-    font-size: 0.7rem;
-    color: var(--muted);
-  }
-
-  /* Bottom nav */
-  .bottom-nav {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    background: rgba(8,10,12,0.95);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid var(--border);
-    display: flex;
-    padding: 0.5rem 0 1rem;
-    z-index: 10;
-  }
-
-  .nav-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    transition: all 0.2s;
-  }
-
-  .nav-item.active .nav-icon { filter: none; }
-  .nav-item:not(.active) .nav-icon { opacity: 0.4; }
-
-  .nav-icon { font-size: 1.3rem; }
-
-  .nav-label {
-    font-size: 0.55rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-
-  .nav-item.active .nav-label { color: var(--green); }
-
-  /* Nav dot */
-  .nav-dot {
-    width: 4px; height: 4px;
-    background: var(--green);
-    border-radius: 50%;
-  }
-
-  /* ── AI ANALYSIS SCREEN ── */
-  .ai-prob-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-  }
-
-  .prob-row {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-  }
-
-  .prob-team-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    min-width: 90px;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    color: var(--white);
-  }
-
-  .prob-bar-wrap {
-    flex: 1;
-    height: 8px;
-    background: var(--card);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .prob-bar {
-    height: 100%;
-    border-radius: 4px;
-  }
-
-  .spain-bar { background: var(--green); }
-  .draw-bar  { background: var(--muted); }
-  .ksa-bar   { background: #4a5568; }
-
-  .prob-pct {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem;
-    color: var(--white);
-    min-width: 2.2rem;
-    text-align: right;
-    line-height: 1;
-  }
-
-  .prob-pct.dim { color: var(--muted); }
-
-  .ai-factors-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-  }
-
-  .factor-item {
-    display: flex;
-    gap: 0.7rem;
-    align-items: flex-start;
-  }
-
-  .factor-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
-
-  .factor-text { display: flex; flex-direction: column; gap: 0.1rem; }
-
-  .factor-text strong {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--white);
-  }
-
-  .factor-text span {
-    font-size: 0.72rem;
-    color: var(--muted);
-    line-height: 1.4;
-  }
-
-  .ai-accuracy-card {
-    background: rgba(0,230,118,0.06);
-    border: 1px solid rgba(0,230,118,0.2);
-    border-radius: 12px;
-    padding: 0.9rem;
-    text-align: center;
-  }
-
-  .accuracy-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.5rem;
-    color: var(--green);
-    line-height: 1;
-  }
-
-  .accuracy-label {
-    font-size: 0.7rem;
-    color: var(--muted);
-    margin-top: 0.2rem;
-    letter-spacing: 0.03em;
-  }
-
-  /* Animations */
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Nav dots */
-  .screen-dots {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-  }
-
-  .screen-dot {
-    width: 6px; height: 6px;
-    border-radius: 3px;
-    background: #2a3442;
-    transition: all 0.3s;
-    cursor: pointer;
-  }
-
-  .screen-dot.active {
-    width: 20px;
-    background: var(--green);
-  }
-
-  /* Navigation buttons */
-  .demo-nav {
-    display: flex;
-    gap: 0.8rem;
-    align-items: center;
-  }
-
-  .demo-nav-btn {
-    background: #141a22;
-    border: 1px solid #2a3442;
-    color: var(--white);
-    padding: 0.6rem 1.2rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s;
-    letter-spacing: 0.05em;
-  }
-
-  .demo-nav-btn:hover {
-    border-color: var(--green);
-    color: var(--green);
-  }
-
-  .demo-nav-btn:disabled {
-    opacity: 0.3;
-    cursor: default;
-  }
-
-  .screen-name {
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    min-width: 100px;
-    text-align: center;
-  }
-
-  @media (max-width: 420px) {
-    .phone { width: 100%; border-radius: 0; }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/demo.css">
 </head>
 <body>
 
@@ -1118,9 +23,7 @@
         <div class="status-bar">
           <span class="status-time">9:41</span>
           <div class="status-icons">
-            <span>●●●</span>
-            <span>WiFi</span>
-            <span>🔋</span>
+            <span>●●●●●</span>
           </div>
         </div>
         <div class="app-header">
@@ -1155,18 +58,45 @@
             </p>
           </div>
 
+          <div class="trivia-alert" onclick="goToScreen(4)">
+            <div class="trivia-alert-left">
+              <span class="trivia-alert-chip">Trivia #2</span>
+              <span class="trivia-alert-text">How many WC goals has Spain's top scorer netted?</span>
+              <span class="trivia-alert-sub">Available until final whistle · Disponible hasta el final</span>
+            </div>
+            <span class="trivia-alert-arrow">›</span>
+          </div>
+
           <div class="stats-row">
             <div class="stat-mini">
-              <div class="stat-mini-num">12</div>
-              <div class="stat-mini-label">Your Points</div>
+              <div class="stat-mini-num">46</div>
+              <div class="stat-mini-label">Team Pts</div>
             </div>
             <div class="stat-mini">
-              <div class="stat-mini-num">#8</div>
-              <div class="stat-mini-label">Your Rank</div>
+              <div class="stat-mini-num">#3</div>
+              <div class="stat-mini-label">Team Rank</div>
             </div>
             <div class="stat-mini">
-              <div class="stat-mini-num">3</div>
-              <div class="stat-mini-label">Correct</div>
+              <div class="stat-mini-num">2×</div>
+              <div class="stat-mini-label">Multiplier</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:0.4rem;">
+            <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:0.2rem;">Upcoming · Próximos</div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.6rem 0.8rem;display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:0.75rem;font-weight:600;">🇺🇸 USA · 🇵🇾 Paraguay</div>
+                <div style="font-size:0.6rem;color:var(--muted);">Jun 22 · 7:00 PM ET</div>
+              </div>
+              <span style="color:var(--muted);font-size:0.9rem;">›</span>
+            </div>
+            <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.6rem 0.8rem;display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:0.75rem;font-weight:600;">🇧🇷 Brazil · 🇨🇴 Colombia</div>
+                <div style="font-size:0.6rem;color:var(--muted);">Jun 23 · 3:00 PM ET</div>
+              </div>
+              <span style="color:var(--muted);font-size:0.9rem;">›</span>
             </div>
           </div>
         </div>
@@ -1176,7 +106,10 @@
           <div class="nav-item" onclick="goToScreen(1)"><div class="nav-icon">🤖</div><div class="nav-label">AI</div></div>
           <div class="nav-item" onclick="goToScreen(2)"><div class="nav-icon">⚽</div><div class="nav-label">Predict</div></div>
           <div class="nav-item" onclick="goToScreen(3)"><div class="nav-icon">🏆</div><div class="nav-label">Ranking</div></div>
-          <div class="nav-item" onclick="goToScreen(4)"><div class="nav-icon">⚡</div><div class="nav-label">Live</div></div>
+          <div class="nav-item" onclick="goToScreen(4)">
+            <div class="nav-icon-wrap">⚡<span class="nav-badge"></span></div>
+            <div class="nav-label">Live</div>
+          </div>
         </div>
       </div>
 
@@ -1184,7 +117,7 @@
       <div class="screen" id="screen-1">
         <div class="status-bar">
           <span class="status-time">9:42</span>
-          <div class="status-icons"><span>●●●</span><span>🔋</span></div>
+          <div class="status-icons"><span>●●●●●</span></div>
         </div>
         <div class="predict-header">
           <button class="back-btn" onclick="goToScreen(0)">← Back</button>
@@ -1258,58 +191,47 @@
       <div class="screen" id="screen-1">
         <div class="status-bar">
           <span class="status-time">9:43</span>
-          <div class="status-icons"><span>●●●</span><span>🔋</span></div>
+          <div class="status-icons"><span>●●●●●</span></div>
         </div>
         <div class="predict-header">
           <button class="back-btn" onclick="goToScreen(1)">← Back</button>
-          <div class="predict-title">Your Prediction</div>
-          <div class="predict-sub">Predicción · Jun 21 · Spain vs Saudi Arabia</div>
+          <div class="predict-title">Team Prediction</div>
+          <div class="predict-sub">Jun 21 · Spain vs Saudi Arabia · Group Stage</div>
         </div>
         <div class="screen-content" style="padding-top:0.5rem">
-          <div class="predict-matchup">
-            <div class="predict-team">
-              <div class="predict-flag">🇪🇸</div>
-              <div class="predict-name">Spain</div>
-              <div class="predict-odds">78% win</div>
+
+          <div class="predict-team-card">
+            <div class="predict-team-card-left">
+              <div class="predict-team-card-label">Your Team</div>
+              <div class="predict-team-card-name">Los Cometas ATL</div>
+              <div class="predict-team-card-venue">📍 El Golazo Sports Bar</div>
             </div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--muted)">VS</div>
-            <div class="predict-team">
-              <div class="predict-flag">🇸🇦</div>
-              <div class="predict-name">Saudi Arabia</div>
-              <div class="predict-odds">22% win</div>
-            </div>
+            <div style="font-size:1.5rem">🦁</div>
           </div>
 
-          <div class="score-selector">
-            <div class="score-label">Predict the Score · Predice el marcador</div>
+          <div class="prediction-input">
+            <div class="prediction-input-label">Predict the score · Predice el marcador</div>
             <div class="score-row">
-              <div class="score-control">
-                <button class="score-btn" onclick="changeScore('home', -1)">−</button>
-                <div class="score-num" id="home-score">2</div>
-                <button class="score-btn" onclick="changeScore('home', 1)">+</button>
+              <div class="score-team">
+                <div class="score-team-flag">🇪🇸</div>
+                <div class="score-team-name">Spain</div>
+                <input type="number" class="score-input" value="2" min="0" max="20">
               </div>
-              <div class="score-dash">-</div>
-              <div class="score-control">
-                <button class="score-btn" onclick="changeScore('away', -1)">−</button>
-                <div class="score-num" id="away-score">0</div>
-                <button class="score-btn" onclick="changeScore('away', 1)">+</button>
+              <div class="score-dash">—</div>
+              <div class="score-team">
+                <div class="score-team-flag">🇸🇦</div>
+                <div class="score-team-name">KSA</div>
+                <input type="number" class="score-input" value="0" min="0" max="20">
               </div>
             </div>
           </div>
 
-          <div class="score-selector">
-            <div class="score-label">Who wins? · ¿Quién gana?</div>
-            <div class="winner-selector">
-              <div class="winner-btn selected" onclick="selectWinner(this)">
-                🇪🇸 Spain
-                <span class="ai-pred-badge">AI Pick</span>
-              </div>
-              <div class="winner-btn" onclick="selectWinner(this)">🤝 Draw</div>
-              <div class="winner-btn" onclick="selectWinner(this)">🇸🇦 KSA</div>
-            </div>
+          <div class="ai-insight" style="padding:0.8rem 1rem">
+            <div class="ai-insight-label">🤖 AI says Spain wins</div>
+            <p class="ai-insight-text">78% probability. Your prediction aligns with the AI — exact score correct earns +5 pts × your 2× multiplier.</p>
           </div>
 
-          <button class="submit-predict" onclick="goToScreen(3)">Submit Prediction → +5 pts</button>
+          <button class="submit-predict" onclick="goToScreen(3)">Save Team Prediction →</button>
         </div>
 
         <div class="bottom-nav">
@@ -1325,11 +247,11 @@
       <div class="screen" id="screen-2">
         <div class="status-bar">
           <span class="status-time">9:45</span>
-          <div class="status-icons"><span>●●●</span><span>🔋</span></div>
+          <div class="status-icons"><span>●●●●●</span></div>
         </div>
         <div class="leaderboard-header">
           <div class="app-header" style="padding:0 0 0.5rem">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem">Atlanta<br>Leaderboard</div>
+            <div style="font-family:'Fraunces',serif;font-size:1.8rem">Atlanta<br>Leaderboard</div>
           </div>
           <div class="lb-sub">World Cup 2026 · Updated live</div>
           <div class="lb-sponsor">
@@ -1344,75 +266,57 @@
         <div class="lb-list">
           <div class="lb-item">
             <div class="lb-rank gold">1</div>
-            <div class="lb-avatar">🦁</div>
+            <div class="lb-avatar">🏆</div>
             <div class="lb-info">
-              <div class="lb-name">Carlos M.</div>
+              <div class="lb-name">Los Domingueros</div>
               <div class="lb-venue">📍 El Golazo Sports Bar</div>
             </div>
-            <div class="lb-points">28</div>
+            <div class="lb-points">58</div>
           </div>
           <div class="lb-item">
             <div class="lb-rank silver">2</div>
-            <div class="lb-avatar">⭐</div>
+            <div class="lb-avatar">⚡</div>
             <div class="lb-info">
-              <div class="lb-name">Ana P.</div>
+              <div class="lb-name">Team García</div>
               <div class="lb-venue">📍 Bar Americano ATL</div>
             </div>
-            <div class="lb-points">24</div>
+            <div class="lb-points">51</div>
           </div>
-          <div class="lb-item">
+          <div class="lb-item me">
             <div class="lb-rank bronze">3</div>
-            <div class="lb-avatar">🔥</div>
+            <div class="lb-avatar">🦁</div>
             <div class="lb-info">
-              <div class="lb-name">Miguel R.</div>
+              <div class="lb-name">Los Cometas ATL <span class="me-badge">YOUR TEAM</span></div>
               <div class="lb-venue">📍 El Golazo Sports Bar</div>
             </div>
-            <div class="lb-points">21</div>
+            <div class="lb-points" style="color:var(--green)">46</div>
           </div>
           <div class="lb-item">
             <div class="lb-rank">4</div>
-            <div class="lb-avatar">⚡</div>
+            <div class="lb-avatar">🌶️</div>
             <div class="lb-info">
-              <div class="lb-name">Sofia L.</div>
+              <div class="lb-name">Las Comadres</div>
               <div class="lb-venue">📍 Nuevo Laredo Cantina</div>
             </div>
-            <div class="lb-points">19</div>
+            <div class="lb-points">38</div>
           </div>
           <div class="lb-item">
             <div class="lb-rank">5</div>
-            <div class="lb-avatar">🎯</div>
+            <div class="lb-avatar">🔥</div>
             <div class="lb-info">
-              <div class="lb-name">David K.</div>
+              <div class="lb-name">Los Paisas ATL</div>
               <div class="lb-venue">📍 Bar Americano ATL</div>
             </div>
-            <div class="lb-points">17</div>
+            <div class="lb-points">31</div>
           </div>
           <div class="lb-item">
             <div class="lb-rank">6</div>
-            <div class="lb-avatar">🌟</div>
+            <div class="lb-avatar">⭐</div>
             <div class="lb-info">
-              <div class="lb-name">Laura V.</div>
-              <div class="lb-venue">📍 El Golazo Sports Bar</div>
-            </div>
-            <div class="lb-points">15</div>
-          </div>
-          <div class="lb-item">
-            <div class="lb-rank">7</div>
-            <div class="lb-avatar">🦅</div>
-            <div class="lb-info">
-              <div class="lb-name">James T.</div>
+              <div class="lb-name">The Crew</div>
               <div class="lb-venue">📍 Estadio ATL</div>
             </div>
-            <div class="lb-points">14</div>
-          </div>
-          <div class="lb-item me">
-            <div class="lb-rank">8</div>
-            <div class="lb-avatar">😎</div>
-            <div class="lb-info">
-              <div class="lb-name">You <span class="me-badge">YOU</span></div>
-              <div class="lb-venue">📍 El Golazo Sports Bar</div>
-            </div>
-            <div class="lb-points" style="color:var(--green)">12</div>
+            <div class="lb-points">24</div>
           </div>
         </div>
 
@@ -1430,7 +334,7 @@
       <div class="screen" id="screen-3">
         <div class="status-bar">
           <span class="status-time">3:47 PM</span>
-          <div class="status-icons"><span>●●●</span><span>🔋</span></div>
+          <div class="status-icons"><span>●●●●●</span></div>
         </div>
         <div class="app-header">
           <div class="app-logo">Live <span>Trivia</span></div>
@@ -1453,16 +357,9 @@
             </div>
           </div>
 
-          <div class="trivia-timer">
-            <div class="timer-circle" style="--progress:270deg">
-              <div class="timer-inner" id="timer-display">12</div>
-            </div>
-            <span style="font-size:0.75rem;color:var(--muted)">seconds to answer</span>
-          </div>
-
           <div class="trivia-question">
-            <div class="trivia-q-label">⚡ Question 3 of 5 · +3 pts</div>
-            <div class="trivia-q-text">How many World Cup goals has Spain's striker scored in his career?</div>
+            <span class="trivia-chip">Trivia #2</span>
+            <div class="trivia-q-text">How many World Cup goals has Spain's all-time top scorer netted?</div>
             <div class="trivia-options">
               <div class="trivia-option" onclick="selectOption(this)">
                 <div class="option-letter">A</div>
@@ -1483,10 +380,14 @@
             </div>
           </div>
 
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:0.8rem;display:flex;align-items:center;justify-content:space-between;">
-            <div style="font-size:0.75rem;color:var(--muted)">Your score this match</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--green)">+6 pts</div>
+          <div class="trivia-saved">
+            ✓ Answer saved · You'll see the result when the match ends
           </div>
+
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.7rem 0.9rem;font-size:0.7rem;color:var(--muted);font-style:italic;">
+            ⭐ Bonus: 5 extra pts if your team gets all 5 right this match.
+          </div>
+          <button class="submit-predict" style="margin-top:0.3rem;">Save Answer · Registrar respuesta</button>
         </div>
 
         <div class="bottom-nav">
@@ -1502,7 +403,7 @@
       <div class="screen prize-screen" id="screen-4">
         <div class="status-bar">
           <span class="status-time">10:00</span>
-          <div class="status-icons"><span>●●●</span><span>🔋</span></div>
+          <div class="status-icons"><span>●●●●●</span></div>
         </div>
         <div class="app-header">
           <div class="app-logo">Goal<span>Cast</span> AI</div>
@@ -1514,23 +415,22 @@
             <div class="prize-sponsor-label">🌟 Tournament Prize · Premio del Torneo</div>
             <div class="prize-venue-name">El Golazo Sports Bar</div>
             <div class="prize-description">Official Watch Party Venue · Atlanta, GA</div>
-            <div class="prize-value">$80</div>
-            <div class="prize-value-label">Dinner for Two · Cena para dos</div>
+            <div class="prize-value-label" style="font-size:1rem;margin:0.8rem 0 0.3rem">🏆 Los Cometas ATL</div>
             <div class="prize-venue-details">
-              📍 123 Peachtree St NE, Atlanta<br>
-              🕐 Valid through August 2026<br>
-              🎫 Show this screen to redeem
+              You won the tournament prize defined by the venue.<br><br>
+              📍 Go to El Golazo to claim it<br>
+              🎫 Show this screen at the bar
             </div>
           </div>
 
           <div class="your-rank">
             <div>
-              <div class="your-rank-label">Your Final Rank</div>
-              <div class="your-rank-pts">World Cup 2026 · Atlanta</div>
+              <div class="your-rank-label">Team Final Rank · Atlanta</div>
+              <div class="your-rank-pts">World Cup 2026 · 8 matches played</div>
             </div>
             <div style="text-align:right">
               <div class="your-rank-num">#1</div>
-              <div class="your-rank-pts">42 points</div>
+              <div class="your-rank-pts">58 points</div>
             </div>
           </div>
 
@@ -1554,7 +454,7 @@
 </div>
 
 <script>
-  const screenNames = ['Home Screen', 'AI Analysis', 'Predict Match', 'ATL Leaderboard', 'Live Trivia', 'Prize Screen'];
+  const screenNames = ['Home', 'AI Analysis', 'Team Prediction', 'ATL Leaderboard', 'Live Trivia', 'Prize'];
   let current = 0;
   const total = 6;
 
@@ -1586,51 +486,15 @@
     document.getElementById('next-btn').disabled = current === total - 1;
     document.getElementById('screen-name').textContent = screenNames[current];
 
-    // Timer animation for trivia
-    if (current === 4) startTimer();
   }
 
   function nextScreen() { goToScreen(current + 1); }
   function prevScreen() { goToScreen(current - 1); }
 
-  // Score controls
-  let homeScore = 2, awayScore = 0;
-  function changeScore(team, delta) {
-    if (team === 'home') {
-      homeScore = Math.max(0, Math.min(9, homeScore + delta));
-      document.getElementById('home-score').textContent = homeScore;
-    } else {
-      awayScore = Math.max(0, Math.min(9, awayScore + delta));
-      document.getElementById('away-score').textContent = awayScore;
-    }
-  }
-
-  // Winner selection
-  function selectWinner(el) {
-    document.querySelectorAll('.winner-btn').forEach(b => b.classList.remove('selected'));
-    el.classList.add('selected');
-  }
-
-  // Trivia option
+  // Trivia option selection
   function selectOption(el) {
     document.querySelectorAll('.trivia-option').forEach(o => o.classList.remove('selected'));
     el.classList.add('selected');
-  }
-
-  // Timer countdown
-  let timerInterval;
-  function startTimer() {
-    clearInterval(timerInterval);
-    let t = 12;
-    const el = document.getElementById('timer-display');
-    const circle = el.closest('.timer-circle');
-    timerInterval = setInterval(() => {
-      t--;
-      if (t <= 0) { clearInterval(timerInterval); t = 0; }
-      el.textContent = t;
-      const deg = (t / 15) * 360;
-      circle.style.setProperty('--progress', deg + 'deg');
-    }, 1000);
   }
 </script>
 </body>

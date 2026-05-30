@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Juanito's Bar · Mundial 2026 · GoalCast AI</title>
+<title>Juanitos Taco & Beer · Mundial 2026 · GoalCast AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -975,6 +975,262 @@ body {
   color: var(--text-secondary);
 }
 
+/* Trivia alert card (home screen) */
+.trivia-alert {
+  margin: 0 16px 16px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, rgba(200,163,92,0.13) 0%, rgba(200,163,92,0.04) 100%);
+  border: 1px solid rgba(200,163,92,0.4);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.trivia-alert-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trivia-alert-chip {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--bg-deep);
+  background: var(--gold);
+  padding: 2px 7px;
+  border-radius: 3px;
+  width: fit-content;
+}
+
+.trivia-alert-text {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.3;
+}
+
+.trivia-alert-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.trivia-alert-arrow {
+  color: var(--gold);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* Tab badge dot */
+.tab-badge-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.tab-badge-dot {
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  border: 1px solid var(--bg-deep);
+}
+
+/* Trivia screen */
+.trivia-chip {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--bg-deep);
+  background: var(--gold);
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+
+.trivia-question {
+  padding: 16px 20px 20px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--cream);
+}
+
+.trivia-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 20px 16px;
+}
+
+.trivia-option {
+  padding: 13px 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--green-line);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--cream-muted);
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+}
+
+.trivia-option.selected {
+  border-color: var(--gold);
+  background: var(--gold-faint);
+  color: var(--cream);
+}
+
+.trivia-submitted {
+  padding: 0 20px 16px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ── PUNTOS ── */
+.points-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+  text-align: left;
+}
+
+.points-block {
+  background: var(--bg-card);
+  border: 1px solid var(--green-line);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.points-block-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  margin-bottom: 14px;
+  font-family: 'Inter', sans-serif;
+}
+
+.points-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--green-line);
+  gap: 12px;
+}
+
+.points-row:last-child { border-bottom: none; }
+
+.points-desc {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  color: var(--cream-muted);
+  line-height: 1.3;
+  flex: 1;
+}
+
+.points-val {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.points-val.dim {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.points-max {
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(200,163,92,0.10) 0%, rgba(200,163,92,0.03) 100%);
+  border: 1px solid rgba(200,163,92,0.3);
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.points-max-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.points-max-label strong {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-style: normal;
+  color: var(--cream);
+  margin-bottom: 2px;
+}
+
+.points-max-val {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 36px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.points-max-val span {
+  font-size: 14px;
+  font-style: normal;
+  color: var(--text-secondary);
+  display: block;
+  text-align: right;
+}
+
+/* ── LOGO ── */
+.venue-logo {
+  width: 160px;
+  height: 80px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  opacity: 0.92;
+  margin-bottom: 8px;
+}
+
+.phone-logo {
+  width: 52px;
+  height: 28px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  display: block;
+}
+
+.brand-mark-img {
+  width: 44px;
+  height: 44px;
+  background: var(--bg-deep);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
 @media (max-width: 640px) {
   .page-header h1 { font-size: 36px; }
   .closing h2 { font-size: 26px; }
@@ -988,8 +1244,9 @@ body {
 
   <header class="page-header">
     <div class="label">Una experiencia exclusiva</div>
-    <h1>Vive el <em>Mundial</em> en Juanito's Bar.</h1>
-    <p>Una plataforma donde cada mesa juega como equipo: predicen juntos, comparten análisis y suben en el ranking del restaurante. Entre más consume la mesa, más puntos suman. Diseñada para que tus comensales vuelvan partido tras partido.</p>
+    <img src="img/juanitos-logo.jpg" alt="Juanitos Taco & Beer" class="venue-logo">
+    <h1>Vive el <em>Mundial</em> aquí.</h1>
+    <p>Una plataforma donde cada mesa juega como equipo: predicen juntos, contestan trivias de cultura futbolera y suben en el ranking del restaurante. Entre más consume la mesa, más puntos suman. Diseñada para que tus comensales vuelvan partido tras partido.</p>
   </header>
 
   <div class="screens-grid">
@@ -997,7 +1254,7 @@ body {
     <div class="screen-block">
       <div class="screen-label">Pantalla 01</div>
       <div class="screen-title">El inicio</div>
-      <div class="screen-desc">El comensal escanea el QR en su mesa y aterriza directo en el partido del día.</div>
+      <div class="screen-desc">El comensal abre la app y ve el partido activo. Si hay una trivia disponible, aparece automáticamente — sin notificaciones, la app revisa al abrirse.</div>
 
       <div class="phone">
         <div class="notch">
@@ -1006,9 +1263,11 @@ body {
         </div>
 
         <div class="app-header">
-          <div class="brand-mark">J</div>
+          <div class="brand-mark-img">
+            <img src="img/juanitos-logo.jpg" alt="Juanitos" class="phone-logo">
+          </div>
           <div>
-            <div class="brand-name">Juanito's Bar</div>
+            <div class="brand-name">Juanitos Taco & Beer</div>
             <div class="brand-sub">Mundial 2026</div>
           </div>
         </div>
@@ -1033,7 +1292,31 @@ body {
           <div class="match-venue">Estadio Azteca · Ciudad de México</div>
         </div>
 
-        <button class="btn-primary">Predecir este partido</button>
+        <button class="btn-primary">Ver análisis del partido →</button>
+
+        <div class="trivia-alert">
+          <div class="trivia-alert-left">
+            <span class="trivia-alert-chip">TRIVIA #2</span>
+            <span class="trivia-alert-text">¿En qué año ganó México<br>su último debut en un Mundial?</span>
+            <span class="trivia-alert-sub">Disponible hasta el silbatazo final</span>
+          </div>
+          <span class="trivia-alert-arrow">›</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:0 16px;">
+          <div style="background:var(--bg-elevated);border:1px solid var(--green-line);border-radius:10px;padding:10px 8px;text-align:center;">
+            <div style="font-family:'Fraunces',serif;font-size:1.3rem;color:var(--gold);font-style:italic;line-height:1;">46</div>
+            <div style="font-size:9px;color:var(--text-secondary);letter-spacing:0.08em;text-transform:uppercase;margin-top:3px;">Pts equipo</div>
+          </div>
+          <div style="background:var(--bg-elevated);border:1px solid var(--green-line);border-radius:10px;padding:10px 8px;text-align:center;">
+            <div style="font-family:'Fraunces',serif;font-size:1.3rem;color:var(--gold);font-style:italic;line-height:1;">#3</div>
+            <div style="font-size:9px;color:var(--text-secondary);letter-spacing:0.08em;text-transform:uppercase;margin-top:3px;">Ranking</div>
+          </div>
+          <div style="background:var(--bg-elevated);border:1px solid var(--green-line);border-radius:10px;padding:10px 8px;text-align:center;">
+            <div style="font-family:'Fraunces',serif;font-size:1.3rem;color:var(--gold);font-style:italic;line-height:1;">2×</div>
+            <div style="font-size:9px;color:var(--text-secondary);letter-spacing:0.08em;text-transform:uppercase;margin-top:3px;">Multiplicador</div>
+          </div>
+        </div>
 
         <div class="upcoming-section">
           <div class="section-label">Próximos días</div>
@@ -1070,6 +1353,13 @@ body {
           <div class="tab">
             <span class="tab-icon">⊞</span>
             Partidos
+          </div>
+          <div class="tab">
+            <span class="tab-badge-wrap">
+              <span class="tab-icon">◈</span>
+              <span class="tab-badge-dot"></span>
+            </span>
+            Trivia
           </div>
           <div class="tab">
             <span class="tab-icon">♛</span>
@@ -1128,6 +1418,25 @@ body {
             <strong>México llega al inaugural con la presión del anfitrión sobre los hombros</strong>, en un Azteca que ha visto historia desde 1970. Aguirre ha priorizado solidez sobre brillantez, con Edson Álvarez como ancla y Santi Giménez liderando el ataque. Sudáfrica regresa después de años, con velocidad por bandas y la disciplina táctica de Hugo Broos. El factor que pocos consideran: <strong>2,250 metros de altura</strong>, un detalle que pesa cuando no estás aclimatado.
           </div>
 
+          <div style="margin-bottom:14px;">
+            <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:10px;font-family:'Inter',sans-serif;font-weight:700;">Probabilidad de victoria</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <div style="font-size:11px;min-width:72px;color:var(--cream-muted);">🇲🇽 México</div>
+              <div style="flex:1;height:5px;background:var(--green-line);border-radius:3px;overflow:hidden;"><div style="width:62%;height:100%;background:var(--gold);border-radius:3px;"></div></div>
+              <div style="font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--gold);min-width:28px;text-align:right;">62%</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <div style="font-size:11px;min-width:72px;color:var(--cream-muted);">🤝 Empate</div>
+              <div style="flex:1;height:5px;background:var(--green-line);border-radius:3px;overflow:hidden;"><div style="width:22%;height:100%;background:var(--green-accent);border-radius:3px;"></div></div>
+              <div style="font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--text-secondary);min-width:28px;text-align:right;">22%</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="font-size:11px;min-width:72px;color:var(--cream-muted);">🇿🇦 Sudáfrica</div>
+              <div style="flex:1;height:5px;background:var(--green-line);border-radius:3px;overflow:hidden;"><div style="width:16%;height:100%;background:var(--text-tertiary);border-radius:3px;"></div></div>
+              <div style="font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--text-secondary);min-width:28px;text-align:right;">16%</div>
+            </div>
+          </div>
+
           <div class="ai-prediction">
             <div class="ai-prediction-label">Predicción AI</div>
             <div class="ai-prediction-value">México 2 — 0 Sudáfrica</div>
@@ -1136,6 +1445,8 @@ body {
           <div class="ai-note">
             Cada mesa recibe un enfoque distinto del partido. La mesa de al lado puede estar leyendo sobre la defensa de Sudáfrica o el historial de Aguirre. Debatan, contrasten, predigan.
           </div>
+
+          <button class="btn-primary" style="width:100%;margin-top:14px;padding:12px;">⚽ Predecir este partido →</button>
         </div>
       </div>
     </div>
@@ -1211,7 +1522,7 @@ body {
 
         <div class="lb-header">
           <div class="lb-trophy">Ranking de mesas</div>
-          <div class="lb-title">Juanito's Bar</div>
+          <div class="lb-title">Juanitos Taco & Beer</div>
           <div class="lb-sub">Mundial 2026 · acumulado</div>
         </div>
 
@@ -1291,7 +1602,133 @@ body {
 
         <div class="lb-prize">
           <div class="lb-prize-label">El premio</div>
-          <div class="lb-prize-text">"Cena para ocho personas en Juanito's Bar a la mesa ganadora del Mundial."</div>
+          <div class="lb-prize-text">"Cena para ocho personas en Juanitos Taco & Beer a la mesa ganadora del Mundial."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen-block">
+      <div class="screen-label">Pantalla 05</div>
+      <div class="screen-title">La trivia</div>
+      <div class="screen-desc">5 preguntas de cultura futbolera por partido. La mesa contesta cuando quiere antes del silbatazo final. Las respuestas se revelan al terminar el partido.</div>
+
+      <div class="phone">
+        <div class="notch">
+          <span>9:41</span>
+          <span>●●●●●</span>
+        </div>
+
+        <div class="form-header">
+          <span class="form-back">‹</span>
+          <span class="form-title">Trivia · México vs Sudáfrica</span>
+        </div>
+
+        <div style="margin:10px 20px;background:var(--bg-elevated);border:1px solid var(--green-line);border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;">
+            <span>🇲🇽</span><span style="font-family:'Fraunces',serif;font-size:13px;">México</span>
+          </div>
+          <div style="font-family:'Fraunces',serif;font-style:italic;font-size:1.4rem;color:var(--gold);">1 — 0</div>
+          <div style="display:flex;align-items:center;gap:6px;font-size:12px;flex-direction:row-reverse;">
+            <span>🇿🇦</span><span style="font-family:'Fraunces',serif;font-size:13px;">Sudáfrica</span>
+          </div>
+        </div>
+
+        <div style="padding: 18px 20px 4px;">
+          <span class="trivia-chip">TRIVIA #2</span>
+        </div>
+
+        <div class="trivia-question">
+          ¿En qué año ganó México su último partido inaugural de Mundial?
+        </div>
+
+        <div class="trivia-options">
+          <div class="trivia-option">A. 1986</div>
+          <div class="trivia-option selected">B. 1994</div>
+          <div class="trivia-option">C. 2002</div>
+          <div class="trivia-option">D. 2018</div>
+        </div>
+
+        <div class="trivia-submitted">
+          Tu respuesta queda registrada. La verás al terminar el partido.
+        </div>
+
+        <div style="padding: 0 20px 16px;">
+          <div class="form-info">
+            Bonus de 5 puntos si aciertas las 5 preguntas del partido.
+          </div>
+        </div>
+
+        <div style="padding: 0 20px 24px;">
+          <button class="btn-primary" style="width: 100%; margin: 0;">Registrar respuesta</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen-block">
+      <div class="screen-label">Pantalla 06</div>
+      <div class="screen-title">El premio</div>
+      <div class="screen-desc">Al terminar el torneo, GoalCast notifica al equipo ganador y los manda al restaurante a reclamar su premio.</div>
+
+      <div class="phone">
+        <div class="notch">
+          <span>9:41</span>
+          <span>●●●●●</span>
+        </div>
+
+        <div class="app-header">
+          <div class="brand-mark-img">
+            <img src="img/juanitos-logo.jpg" alt="Juanitos" class="phone-logo">
+          </div>
+          <div>
+            <div class="brand-name">Juanitos Taco & Beer</div>
+            <div class="brand-sub">Mundial 2026</div>
+          </div>
+        </div>
+
+        <div style="padding:28px 20px 20px;text-align:center;">
+          <div style="font-size:3rem;margin-bottom:12px;">🏆</div>
+          <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:8px;font-family:'Inter',sans-serif;font-weight:700;">Premio del Torneo</div>
+          <div style="font-family:'Fraunces',serif;font-size:1.2rem;font-weight:500;margin-bottom:4px;">Los Domingueros</div>
+          <div style="font-size:11px;color:var(--text-secondary);font-style:italic;margin-bottom:20px;">Campeones del Mundial en Juanitos</div>
+
+          <div style="background:linear-gradient(135deg,rgba(200,163,92,0.12),rgba(200,163,92,0.03));border:1px solid rgba(200,163,92,0.3);border-radius:14px;padding:18px 16px;text-align:left;">
+            <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:10px;font-family:'Inter',sans-serif;font-weight:700;">Premio del restaurante</div>
+            <div style="font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--cream);line-height:1.5;margin-bottom:14px;">"Ve a reclamar tu premio directamente en Juanitos Taco & Beer."</div>
+            <div style="font-size:11px;color:var(--text-secondary);line-height:1.7;">
+              📍 Preséntate en el restaurante<br>
+              🎫 Muestra esta pantalla al llegar<br>
+              📅 Premio válido por 30 días
+            </div>
+          </div>
+
+          <div style="margin-top:16px;padding:12px 14px;background:var(--bg-elevated);border:1px solid var(--green-line);border-radius:10px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:10px;color:var(--text-secondary);">Ranking final del torneo</div>
+              <div style="font-size:11px;color:var(--cream);margin-top:2px;">6 personas · 58 puntos totales</div>
+            </div>
+            <div style="font-family:'Fraunces',serif;font-style:italic;font-size:1.8rem;color:var(--gold);">#1</div>
+          </div>
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab active">
+            <span class="tab-icon">⌂</span>
+            Inicio
+          </div>
+          <div class="tab">
+            <span class="tab-icon">⊞</span>
+            Partidos
+          </div>
+          <div class="tab">
+            <span class="tab-badge-wrap">
+              <span class="tab-icon">◈</span>
+            </span>
+            Trivia
+          </div>
+          <div class="tab">
+            <span class="tab-icon">♛</span>
+            Ranking
+          </div>
         </div>
       </div>
     </div>
@@ -1323,6 +1760,76 @@ body {
   </section>
 
   <section class="closing" style="border-top: none; padding-top: 0; margin-top: 0;">
+    <div class="closing-label">Sistema de puntos</div>
+    <h2>Así se gana. <em>Así se compite.</em></h2>
+    <p>Cada mesa acumula puntos por predicciones, trivia y consumo. Al final del torneo, la mesa con más puntos gana el premio.</p>
+
+    <div class="points-grid">
+
+      <div class="points-block">
+        <div class="points-block-label">⚽ Predicción del partido</div>
+        <div class="points-row">
+          <div class="points-desc">Marcador exacto</div>
+          <div class="points-val">+5 pts</div>
+        </div>
+        <div class="points-row">
+          <div class="points-desc">Ganador correcto</div>
+          <div class="points-val">+3 pts</div>
+        </div>
+        <div class="points-row">
+          <div class="points-desc">Predicción incorrecta</div>
+          <div class="points-val dim">0 pts</div>
+        </div>
+      </div>
+
+      <div class="points-block">
+        <div class="points-block-label">🧠 Trivia del partido</div>
+        <div class="points-row">
+          <div class="points-desc">Respuesta correcta</div>
+          <div class="points-val">+2 pts</div>
+        </div>
+        <div class="points-row">
+          <div class="points-desc">5 de 5 correctas</div>
+          <div class="points-val">+5 bonus</div>
+        </div>
+        <div class="points-row">
+          <div class="points-desc">Trivia perfecta</div>
+          <div class="points-val">15 pts</div>
+        </div>
+      </div>
+
+      <div class="points-block">
+        <div class="points-block-label">🍺 Multiplicador de consumo</div>
+        <div class="points-row">
+          <div class="points-desc">Hasta $399</div>
+          <div class="points-val dim">1×</div>
+        </div>
+        <div class="points-row">
+          <div class="points-desc">$400 — $699</div>
+          <div class="points-val">1.5×</div>
+        </div>
+        <div class="points-row">
+          <div class="points-desc">$700 o más</div>
+          <div class="points-val">2×</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="points-max">
+      <div class="points-max-label">
+        <strong>Máximo por partido</strong>
+        Marcador exacto + trivia perfecta × consumo máximo
+      </div>
+      <div class="points-max-val">
+        40
+        <span>pts / partido</span>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="closing" style="border-top: none; padding-top: 0; margin-top: 0;">
     <div class="closing-label">Lo que incluye</div>
     <h2>Un Mundial diseñado <em>a la medida</em> de tu restaurante.</h2>
     <p>Marca personalizada, dominio propio, análisis AI que se actualizan diariamente, base de datos de tus comensales y operación llave en mano durante los 39 días del torneo.</p>
@@ -1347,6 +1854,11 @@ body {
         <div class="feature-num">04</div>
         <h3>Tu base de datos</h3>
         <p>Captura los grupos de comensales que vuelven al restaurante. Tuya para siempre.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-num">05</div>
+        <h3>Trivias entre partidos</h3>
+        <p>5 preguntas de cultura futbolera por partido para mantener a la mesa enganchada antes y durante el juego. Bonus por respuestas perfectas.</p>
       </div>
     </div>
   </section>

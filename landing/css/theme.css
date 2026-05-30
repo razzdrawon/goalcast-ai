@@ -1,0 +1,27 @@
+  :root {
+    --black: #0a1410;
+    --surface: #11201a;
+    --border: #1f3a2e;
+    --green: #c8a35c;
+    --green-dim: #a18649;
+    --gold: #c8a35c;
+    --gold-faint: rgba(200, 163, 92, 0.12);
+    --white: #f4ecd8;
+    --muted: #a8a395;
+    --red: #c0524a;
+    --green-deep: #2d5b46;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(45, 91, 70, 0.20) 0%, transparent 50%),
+      radial-gradient(circle at 80% 60%, rgba(200, 163, 92, 0.06) 0%, transparent 50%);
+  }
